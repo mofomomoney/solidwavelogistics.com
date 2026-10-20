@@ -4,25 +4,20 @@ The company website for solidwavelogistics.com (bought by the owner at Porkbun o
 October). One page, no build step: index.html, assets/css/site.css and assets/js/site.js. It's kept here, outside
 OneDrive, like the app (ProjectTrackerDesktop), with its history in git.
 
-THE PAGE, TOP TO BOTTOM (rebuilt 2026-10-20 from the owner's brief; businesses first, drivers second)
-  - The top: "Your routes. Our responsibility." with Partner with SolidWave (main) and Drive with SolidWave.
-    On the logo's wave to the right: what we take on (the vehicles, the drivers, the daily operation). On a
-    phone the wave part sits under the words, on the blue.
-  - What we do (#services): the five services as plain lines with icons: route coverage, fleet solutions, driver
-    management, operations management, scalable solutions.
-  - How we work (#how-we-work): the three steps of a partnership.
-  - Why SolidWave (#why): "Built around your operation." Flexible, reliable, in touch, accountable.
-  - Our operation (#operation): "Every mile accounted for." A slideshow of SolidWave Tracker, shown as how we
-    run (not software for sale, and not our money): Drivers, Routes, Fleet, Documents, three points each. Every
-    4.5 seconds the next point lights up on the real app picture; after the third, the whole section slides to
-    the next part. It waits while it's pointed at or off screen, has Pause/Play, and doesn't move on its own for
-    people who turn motion off. Written by tools/showcase.js (see below); the Forecast picture is kept there,
-    out of the list (SHOW), until the owner wants it back.
+THE PAGE, TOP TO BOTTOM (cut down 2026-10-20: the owner wants it short, said once, no filler sections)
+  - The top: "Your routes. Our responsibility." and the one sentence that says what we do: SolidWave supplies and
+    manages the fleet and Class A CDL drivers that cover your contracted delivery routes. Partner with SolidWave,
+    and a quiet "Looking to drive? Apply here". On the logo's wave: How we work, three numbered steps. On a phone
+    the steps sit under the words, on the blue.
+  - Our operation (#operation): "Every mile accounted for." A focused look at how we stay accountable in
+    SolidWave Tracker: Routes, Drivers, Fleet, two points each, sliding on by themselves (Pause/Play; still for
+    people who turn motion off). Written by tools/showcase.js; Documents and the Forecast stay in the folder, off
+    the page (its SHOW list). No money on the site: no payroll, costs or profit.
   - Let's cover your routes (#contact): the request form (contact name, company, email, phone if they like,
-    where, what the routes need, in their own words) and the email link. The Call link shows only once there's
-    a phone number.
-  - Drive with SolidWave (#drive): the driver application, Class A only (years with a Class A, equipment in their own words).
-  - The bottom: the links, the email, the year.
+    where, what the routes need in their own words) and the email link. The Call link shows once there's a phone.
+  - Drive with SolidWave (#drive): one line (local delivery routes for Class A CDL drivers, paid by the day), then
+    the application (name, phone, city or ZIP, years with a Class A, equipment in their own words).
+  - The bottom: logo, three links, the email, the year.
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
   opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
   it. (Applications going straight into SolidWave Tracker is waiting on the owner.)
@@ -52,7 +47,7 @@ CHECKING
   tools/check-site.js opens the site in a hidden window at a computer's, a tablet's and a phone's width and
   looks for errors, sideways scrolling, fonts, pictures, the slideshow moving, the application's messages and
   buttons too small to tap; it saves full-page pictures to tools/shots (not kept in git). tools/shot-at.js
-  takes one screen at a section. Both run with the Electron that ProjectTrackerDesktop already has:
+  takes one screen at a section; tools/full-page.js takes the whole page in one piece (W=1440 or W=390). Both run with the Electron that ProjectTrackerDesktop already has:
     ..\ProjectTrackerDesktop\node_modules\electron\dist\electron.exe tools\check-site.js
 
 DRIVER APPLICATIONS

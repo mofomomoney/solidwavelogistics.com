@@ -1,10 +1,11 @@
-/* Writes the "How we run" slideshow into index.html, between <!-- showcase:start … --> and <!-- showcase:end -->.
+/* Writes the "Our operation" slideshow into index.html, between <!-- showcase:start … --> and <!-- showcase:end -->.
    The pictures and where each highlight goes come from tools/slides.json (made by tools/app-shots.js from the
    SolidWave Tracker test copy); the words are below. Run: node tools/showcase.js
 
    The owner, 2026-10-19: show the app the way the guided tour did, with the highlights moving on by themselves
-   and the whole section sliding to another part of the app after the last one; Financials and Documents too
-   ("Really trying to sell this"); the headline "Every mile accounted for". */
+   and the whole section sliding to another part of the app after the last one; the headline "Every mile
+   accounted for". 2026-10-20: a shorter site, so this is a focused look at how we stay accountable: three parts,
+   two points each, and none of our money (payroll, costs, profit). */
 "use strict";
 const fs = require("fs");
 const path = require("path");
@@ -12,46 +13,41 @@ const root = path.join(__dirname, "..");
 const S = JSON.parse(fs.readFileSync(path.join(__dirname, "slides.json"), "utf8"));
 const pct = (v, of) => +(v / of * 100).toFixed(2);
 
-/* what each part of the app is for, in the partners' terms (no last-mile basics, no real names) */
+/* each part of the app, in the order of slides.json. A point is [which highlight on the picture, its title, its
+   line]: the highlights are 0, 1 and 2 in the order app-shots.js measured them */
 const COPY = [
-  { tab: "Drivers", kicker: "Hiring", title: "Hiring by the book", topics: [
-    ["Same steps, every driver", "Interview, background, offer, hired. Nobody skips ahead."],
-    ["Paperwork watched", "Licenses and DOT medical cards are flagged 30 days before they run out."],
-    ["Nothing gets skipped", "Driving record, background check, drug test, DOT medical card. Ticked off one by one."]] },
-  { tab: "Routes", kicker: "Routes", title: "Every route at a glance", topics: [
-    ["Every route, by stage", "Offered, accepted, setting up, running: we see where each one stands."],
-    ["A driver and a truck on each", "Every route shows the driver and the truck running it."],
-    ["Gaps show up the same day", "A route missing its driver or truck turns amber, so it's handled before it's a problem."]] },
+  { tab: "Drivers", kicker: "Drivers", title: "Vetted before day one", topics: [
+    [2, "Every check, every driver", "Driving record, background check, drug test and DOT medical card, ticked off one by one."],
+    [1, "Credentials watched", "CDLs and medical cards are flagged 30 days before they expire."]] },
+  { tab: "Routes", kicker: "Routes", title: "Every route covered", topics: [
+    [1, "A driver and a truck on each", "Every route shows who's driving it and what they're driving."],
+    [2, "Gaps caught the same day", "A route missing its driver or truck is flagged before it becomes a problem."]] },
   { tab: "Fleet", kicker: "Fleet", title: "Equipment ready to roll", topics: [
-    ["The right setup", "Every unit on record with its configuration, its status and its paperwork."],
-    ["Ready before it rolls", "Every unit goes through the same steps, from sourcing to in service."],
-    ["Inspections watched", "Registrations and inspections are flagged 30 days before they run out."]] },
+    [1, "Ready before it rolls", "Every unit goes through the same steps, from sourcing to in service."],
+    [0, "Every unit on record", "Each truck and trailer with its configuration, status and paperwork."]] },
   { tab: "Documents", kicker: "Documents", title: "Every paper in one place", topics: [
-    ["All in one place", "CDLs, medical cards, insurance certificates, agreements. One list, nothing lost in a drawer."],
-    ["Tied to its driver or store", "Every document belongs to a driver or a store, one click from their page."],
-    ["Found in seconds", "Search by name, or narrow it down by type, driver, store or tag."]] },
-  /* the Forecast tab (the owner, 2026-10-20: "the forecast is the coolest part about the financials. Show that.") */
+    [0, "All in one place", "CDLs, medical cards, insurance certificates, agreements. One list, nothing lost in a drawer."],
+    [1, "Tied to its driver or store", "Every document belongs to a driver or a store, one click from their page."]] },
   { tab: "Financials", kicker: "Forecast", title: "The math before the handshake", topics: [
-    ["Every deal, line by line", "Rate, driver pay, rent, fuel and insurance for each configuration, before we say yes."],
-    ["A week, a month, a year", "What a deal leaves each week, month and year, and the cash it takes to start."],
-    ["Cash, week by week", "Costs out, pay in, and the week it's back to even. So every route we take, we keep running."]] },
+    [0, "Every deal, line by line", "Rate, driver pay, rent, fuel and insurance for each configuration, before we say yes."],
+    [1, "A week, a month, a year", "What a deal leaves each week, month and year, and the cash it takes to start."],
+    [2, "Cash, week by week", "Costs out, pay in, and the week it's back to even."]] },
 ];
 if (COPY.length !== S.slides.length) throw new Error("slides.json has " + S.slides.length + " pictures, the words have " + COPY.length);
-/* the parts on the page. The owner's brief (2026-10-20): Tracker is shown as how we run, not as software for sale,
-   and not with our money (payroll, costs, profit). So the Forecast stays out for now; add "Financials" back here
-   to show it again */
-const SHOW = ["Drivers", "Routes", "Fleet", "Documents"];
-const PARTS = COPY.map((c, i) => ({ c, sl: S.slides[i] })).filter(p => SHOW.indexOf(p.c.tab) >= 0);
+/* the parts on the page, in this order. Documents and the Forecast stay in the folder, off the page; add their
+   names here to show them again */
+const SHOW = ["Routes", "Drivers", "Fleet"];
+const PARTS = SHOW.map(name => { const i = COPY.findIndex(c => c.tab === name); if (i < 0) throw new Error("no part called " + name); return { c: COPY[i], sl: S.slides[i] }; });
 
 const slideHtml = (part, i) => {
-  const sl = part.sl;
+  const sl = part.sl, c = part.c;
   /* a highlight stays inside the picture, so its whole outline shows */
   const fit = t => { const x = Math.max(2, t.x), y = Math.max(2, t.y); return { x: x, y: y, w: Math.min(t.w - (x - t.x), sl.w - 2 - x), h: Math.min(t.h - (y - t.y), sl.h - 3 - y) }; };
   const r = t => { t = fit(t); return [pct(t.x, sl.w), pct(t.y, sl.h), pct(t.w, sl.w), pct(t.h, sl.h)]; };
-  const c = part.c, first = r(sl.topics[0]);
+  const first = r(sl.topics[c.topics[0][0]]);
   return `      <div class="slide" id="slide-${i}" role="tabpanel" aria-roledescription="slide" aria-label="${i + 1} of ${PARTS.length}: ${c.tab}">
         <div><span class="kicker">${c.kicker}</span><h3>${c.title}</h3>
-          <div class="topics">${c.topics.map((t, k) => `<button type="button" class="topic${k === 0 ? " on" : ""}" aria-pressed="${k === 0}" data-r="${JSON.stringify(r(sl.topics[k]))}"><b>${t[0]}</b><span>${t[1]}</span><i class="time"></i></button>`).join("")}</div></div>
+          <div class="topics">${c.topics.map((t, k) => `<button type="button" class="topic${k === 0 ? " on" : ""}" aria-pressed="${k === 0}" data-r="${JSON.stringify(r(sl.topics[t[0]]))}"><b>${t[1]}</b><span>${t[2]}</span><i class="time"></i></button>`).join("")}</div></div>
         <figure class="win"><div class="tb"><img src="assets/img/wave-small.png" alt="" width="81" height="22">SolidWave Tracker<span class="ctl" aria-hidden="true">&#8211;&nbsp;&nbsp;&#9633;&nbsp;&nbsp;&#215;</span></div>
           <div class="pic"><img src="assets/img/app/${sl.img}" alt="${c.tab} in SolidWave Tracker" width="${sl.w}" height="${sl.h}"${i ? ' loading="lazy"' : ""}><span class="lit" style="left:${first[0]}%;top:${first[1]}%;width:${first[2]}%;height:${first[3]}%"></span></div></figure>
       </div>`;
@@ -62,7 +58,7 @@ const section = `<!-- showcase:start (written by tools/showcase.js from the app'
   <div class="wrap">
     <p class="eyebrow">Our operation</p>
     <h2 class="display" id="howH">Every mile<br><span class="w">accounted for.</span></h2>
-    <p class="say">Behind every route we cover is SolidWave Tracker, the system we built to run our own operation. Drivers, vehicles, routes and paperwork are organized in one place, so coordination stays tight and every route stays accountable. Here's a look inside.</p>
+    <p class="say">Every route, driver and vehicle we manage runs through SolidWave Tracker, the system we built to run our operation.</p>
     <div class="deck-bar">
       <div class="deck-tabs" role="tablist" aria-label="Parts of SolidWave Tracker">${PARTS.map((p, i) => `<button type="button" class="deck-tab" role="tab" id="tab-${i}" aria-controls="slide-${i}" aria-selected="${i === 0}">${p.c.tab}</button>`).join("")}</div>
       <button type="button" class="deck-pause" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z" fill="currentColor"/></svg><svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg><span>Pause</span></button>
@@ -72,8 +68,7 @@ const section = `<!-- showcase:start (written by tools/showcase.js from the app'
 ${PARTS.map(slideHtml).join("\n")}
       </div>
     </div>
-    <p class="fine">Real pages from our internal system. The names and numbers are examples.</p>
-    <div class="cta"><a class="btn btn-blue" href="#contact">Partner with SolidWave <i data-icon="arrow"></i></a><span>Want to see how we'd run your routes? <b>We'll walk you through it.</b></span></div>
+    <p class="fine">Real pages from our system. The names and numbers are examples.</p>
   </div>
 </section>
 <!-- showcase:end -->`;

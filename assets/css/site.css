@@ -29,7 +29,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--blue-light);outline-offset:3px;border-radius:4px}
 .skip{position:absolute;left:12px;top:-80px;z-index:50;padding:10px 16px;border-radius:8px;background:var(--blue);color:#fff;font-weight:600}
 .skip:focus{top:12px}
-[hidden]{display:none!important}   /* a button kept off the page (no phone number yet) stays off, whatever its style */
+[hidden]{display:none!important}   /* a link kept off the page (no phone number yet) stays off, whatever its style */
 
 /* the logo's own letters: wide, heavy capitals */
 .display{font-family:var(--display);font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:.004em;line-height:.98}
@@ -40,12 +40,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .btn svg{width:18px;height:18px;flex:0 0 auto}
 .btn-blue{background:var(--blue);color:#fff}
 .btn-blue:hover{background:var(--blue-deep)}
-.btn-white{background:#fff;color:var(--navy)}
-.btn-white:hover{background:#E8F1FF}
-.btn-line{border-color:var(--navy);color:var(--navy);background:#fff}
-.btn-line:hover{background:#EEF4FF;border-color:var(--blue-deep);color:var(--blue-deep)}
 
-/* ---------- the top bar: the logo, the sections, Partner with SolidWave ---------- */
+/* ---------- the top bar: the logo, two links, Partner with SolidWave ---------- */
 .bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:40px;height:84px}
 .nav .brand img{height:50px;width:auto}
@@ -54,66 +50,35 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav nav a:hover{color:var(--blue)}
 .nav .btn{min-height:46px;padding:0 20px;font-size:15px}
 
-/* ---------- the top: what we do, for businesses; the logo's wave on the right holds what we take on ---------- */
+/* ---------- the top: what we do, once; how we work on the logo's wave ---------- */
 .top{position:relative;overflow:hidden;background:#fff}
-/* the wave starts just right of the middle, so it always sits between the words and the list */
+/* the wave starts just right of the middle, so it always sits between the words and the steps */
 .split{position:absolute;top:0;left:calc(50% + 96px);width:calc(50% - 96px);height:100%;z-index:0}
-.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:120px;align-items:center;padding-top:88px;padding-bottom:104px}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:120px;align-items:center;padding-top:96px;padding-bottom:104px}
 .lead .eyebrow{color:var(--blue-deep);margin-bottom:18px}
 .lead h1{font-size:clamp(34px,3.3vw,52px);color:var(--navy)}
 .lead h1 .w{color:var(--blue)}
-.lead .sub{margin-top:26px;font-size:20px;line-height:1.6;color:var(--slate);max-width:600px}
-.acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.lead .sub{margin-top:26px;font-size:21px;line-height:1.55;color:var(--slate);max-width:580px}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:36px}
+/* the way in for drivers: there, but quiet */
+.quiet{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;color:var(--blue-deep);text-decoration:underline;text-underline-offset:4px}
+.quiet:hover{color:var(--navy)}
 .cover{color:#fff;padding-left:40px}
-.cover h2{color:#CFE2FF;margin-bottom:20px}
-.cover ul{list-style:none;display:grid;gap:22px}
-.cover li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start}
-.cover li svg{width:44px;height:44px;padding:10px;border-radius:10px;background:rgba(255,255,255,.14);color:#fff}
+.cover h2{color:#CFE2FF;margin-bottom:22px}
+.cover ol{list-style:none;display:grid;gap:24px}
+.cover li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:start}
+.cover .n{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.6);font:700 16px var(--sans);color:#fff}
 .cover li p{font-size:16px;line-height:1.5;color:#DCE8FF}
-.cover li b{display:block;font:800 17px/1.25 var(--display);font-stretch:125%;text-transform:uppercase;color:#fff;margin-bottom:3px}
-
-/* ---------- what we do: the five services as plain lines, each with its icon ---------- */
-.services{background:#fff;padding:104px 0 96px}
-.services .wrap{display:grid;grid-template-columns:380px minmax(0,1fr);gap:88px;align-items:start}
-.services .intro{position:sticky;top:124px}
-.services .eyebrow,.steps .eyebrow,.show .eyebrow{color:var(--blue-deep);margin-bottom:16px}
-.services h2,.steps h2,.show h2{font-size:48px;color:var(--navy)}
-.services h2 .w,.steps h2 .w,.show h2 .w{color:var(--blue)}
-.services p.say{margin-top:22px;font-size:19px;line-height:1.6;color:var(--slate)}
-.services .intro .btn{margin-top:32px}
-.svc{list-style:none;border-top:1px solid var(--line)}
-.svc li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:22px;padding:26px 0;border-bottom:1px solid var(--line)}
-.svc li > svg{width:52px;height:52px;padding:13px;border-radius:12px;background:#E8F1FF;color:var(--blue-deep)}
-.svc h3{font:800 20px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy);padding-top:4px}
-.svc p{margin-top:8px;font-size:17px;line-height:1.6;color:var(--slate);max-width:620px}
-
-/* ---------- how we work: three steps, in order ---------- */
-.steps{background:var(--paper);padding:104px 0}
-.flow{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:56px}
-.flow li{position:relative;padding-top:26px;border-top:3px solid var(--line)}
-.flow li::before{content:"";position:absolute;left:0;top:-3px;width:64px;height:3px;background:var(--blue)}
-.flow .n{display:block;font:600 13px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue-deep)}
-.flow h3{margin-top:12px;font:800 22px/1.15 var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
-.flow p{margin-top:12px;font-size:17px;line-height:1.6;color:var(--slate)}
-
-/* ---------- built around your operation, on navy ---------- */
-.fit{background:var(--navy);color:#fff;padding:104px 0}
-.fit .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:88px;align-items:center}
-.fit .eyebrow{color:#9FC3FF;margin-bottom:16px}
-.fit h2{font-size:48px}
-.fit h2 .w{color:#3EA0FF}
-.fit p.say{margin-top:24px;font-size:19px;line-height:1.65;color:#C9D6EA}
-.values{list-style:none;display:grid;grid-template-columns:1fr 1fr}
-.values li{padding:24px 28px 26px 0;border-top:1px solid #1E3866}
-.values li:nth-child(even){padding:24px 0 26px 28px;border-left:1px solid #1E3866}
-.values h3{font:800 18px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:#fff}
-.values p{margin-top:8px;font-size:16px;line-height:1.55;color:#B8C7DE}
+.cover li b{display:block;font:800 17px/1.25 var(--display);font-stretch:125%;text-transform:uppercase;color:#fff;margin-bottom:4px;padding-top:2px}
 
 /* ---------- our operation: SolidWave Tracker, shown as a slideshow ---------- */
-.show{background:#fff;padding:104px 0 100px}
-.show p.say{margin-top:22px;font-size:20px;line-height:1.6;color:var(--ink);max-width:860px}
+.show{background:var(--paper);padding:96px 0 88px}
+.show .eyebrow{color:var(--blue-deep);margin-bottom:16px}
+.show h2{font-size:48px;color:var(--navy)}
+.show h2 .w{color:var(--blue)}
+.show p.say{margin-top:20px;font-size:20px;line-height:1.6;color:var(--slate);max-width:760px}
 /* which part of the app is showing, and Pause */
-.deck-bar{display:flex;align-items:center;gap:4px;margin-top:48px;border-bottom:1px solid var(--line)}
+.deck-bar{display:flex;align-items:center;gap:4px;margin-top:40px;border-bottom:1px solid var(--line)}
 .deck-tabs{display:flex;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}
 .deck-tabs::-webkit-scrollbar{display:none}
 .deck-tab{position:relative;flex:0 0 auto;padding:14px 18px;font:700 16px var(--sans);color:var(--slate);background:none;border:0;cursor:pointer}
@@ -127,7 +92,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .deck-pause[aria-pressed="false"] .ic-play,.deck-pause[aria-pressed="true"] .ic-pause{display:none}
 /* the parts of the app side by side; the whole row slides to the next one. Room around each slide, so a
    window's shadow never shows on the slide beside it */
-.deck{overflow:hidden;margin:40px -56px 0}
+.deck{overflow:hidden;margin:36px -56px 0}
 .track{display:flex;transition:transform .8s cubic-bezier(.65,0,.35,1)}
 .slide{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:310px 1fr;gap:56px;align-items:center;padding:4px 56px 44px}
 .slide .kicker{display:block;font:600 13px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:10px}
@@ -138,7 +103,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .topic b{display:block;font:800 17px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:#6E7F99}
 .topic span{display:block;margin-top:6px;font-size:16px;line-height:1.5}
 .topic:hover b{color:var(--navy)}
-.topic.on{border-left-color:var(--blue);background:var(--paper)}
+.topic.on{border-left-color:var(--blue);background:#fff}
 .topic.on b{color:var(--navy)}
 .topic.on span{color:var(--ink)}
 /* how long until the next topic: a thin line filling along its bottom */
@@ -154,39 +119,32 @@ button,input,select,textarea{font:inherit;color:inherit}
 .lit{position:absolute;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,19,52,.5);outline:3px solid var(--blue-light);
   transition:left .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1)}
 .show .fine{font-size:14px;color:var(--slate);margin-top:6px}
-.show .cta{display:flex;align-items:center;gap:22px;margin-top:36px;flex-wrap:wrap}
-.show .cta span{color:var(--slate);font-size:17px}
-.show .cta span b{color:var(--navy)}
 
 /* ---------- let's cover your routes: the request form, on the logo's blue ---------- */
 .reach{background:linear-gradient(135deg,var(--blue-deep),var(--blue));color:#fff;padding:96px 0}
 .reach .wrap{display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:72px;align-items:start}
 .reach .ask{padding-top:12px}
-.reach .eyebrow{color:#CFE2FF;margin-bottom:16px}
 .reach h2{font-size:52px}
 .reach h2 .w{color:#BFE0FF}
-.reach p.t{margin-top:20px;font-size:20px;line-height:1.6;color:#E3EEFF;max-width:520px}
-.direct{list-style:none;margin-top:32px;display:grid;gap:6px}
+.reach p.t{margin-top:20px;font-size:20px;line-height:1.6;color:#E3EEFF;max-width:480px}
+.direct{list-style:none;margin-top:28px;display:grid;gap:6px}
 .direct a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:18px;font-weight:600;color:#fff}
 .direct a:hover{text-decoration:underline}
 .direct svg{width:20px;height:20px;flex:0 0 auto}
 
-/* ---------- drivers: the application right on the page ---------- */
-.drivers{background:var(--navy);color:#fff;padding:96px 0}
+/* ---------- drivers: one line, then the application ---------- */
+.drivers{background:var(--navy);color:#fff;padding:88px 0}
 .drivers .wrap{display:grid;grid-template-columns:1fr 500px;gap:80px;align-items:center}
-.drivers .eyebrow{color:#9FC3FF}
-.drivers h2{font-size:52px;margin-top:14px}
+.drivers h2{font-size:52px}
 .drivers h2 .w{color:#3EA0FF}
-.drivers p.t{margin-top:18px;font-size:19px;color:#C9D6EA;max-width:520px}
-.drivers ul{list-style:none;margin-top:28px;display:grid;gap:12px}
-.drivers li{display:flex;gap:12px;align-items:center;font-size:18px}
-.drivers li svg{width:20px;height:20px;color:#3EA0FF;flex:0 0 auto}
+.drivers p.t{margin-top:20px;font-size:20px;color:#C9D6EA;max-width:440px}
 
 /* ---------- the forms (the request and the driver application) ---------- */
 .form{background:#fff;color:var(--ink);border-radius:18px;padding:32px}
 .form h3{font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
 .form p.s{color:var(--slate);font-size:15px;margin-top:6px}
 .f{display:block;margin-top:16px;min-width:0}
+.form > .two:first-child .f,.form > .f:first-child{margin-top:0}
 .f > label{display:block;font:600 14px var(--sans);color:var(--slate);margin-bottom:6px}
 .f label em{font-style:normal;font-weight:400;color:#5F7088;margin-left:4px}
 .f input,.f select,.f textarea{display:block;width:100%;height:50px;padding:0 16px;border:1.5px solid #8E9FB8;border-radius:10px;background:#F8FAFC;font-size:17px;color:var(--ink)}
@@ -213,17 +171,15 @@ button,input,select,textarea{font:inherit;color:inherit}
 .form .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ---------- the bottom ---------- */
-footer{background:var(--navy);color:#C7D3E6;padding:0 0 36px}
-footer .wrap{border-top:1px solid #1E3866;padding-top:48px}
-footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
-footer img{height:46px;width:auto}
-footer .tag{margin-top:16px;font-size:15px;line-height:1.55;color:#8FA3C4;max-width:300px}
-footer h4{font:600 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:14px}
-footer ul{list-style:none}
-footer li{margin:8px 0;font-size:16px}
-footer li a{display:inline-block;padding:4px 0}
+footer{background:var(--navy);color:#C7D3E6;padding:0 0 32px}
+footer .wrap{border-top:1px solid #1E3866;padding-top:36px}
+.foot{display:flex;align-items:center;flex-wrap:wrap;gap:16px 40px}
+.foot img{height:46px;width:auto}
+.foot nav,.foot .reachout{display:flex;flex-wrap:wrap;gap:4px 28px;font-size:16px}
+.foot .reachout{margin-left:auto}
+.foot a{display:inline-flex;align-items:center;min-height:32px}
 footer a:hover{color:#fff;text-decoration:underline}
-footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;font-size:14px;color:#8FA3C4}
+footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit{transition:none}}
 
@@ -231,13 +187,11 @@ footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 @media (max-width:1100px){
   :root{--gutter:40px}
   .hero{grid-template-columns:minmax(0,1fr) 320px;gap:96px}
-  .services .wrap{grid-template-columns:320px minmax(0,1fr);gap:56px}
-  .fit .wrap{gap:56px}
   .slide{grid-template-columns:270px 1fr;gap:40px}
   .reach .wrap{grid-template-columns:minmax(0,1fr) 470px;gap:48px}
   .drivers .wrap{grid-template-columns:1fr 440px;gap:48px}
 }
-/* the top's two halves one above the other: the words on white, then what we take on, on the blue */
+/* the top's two halves one above the other: the words on white, then how we work, on the blue */
 @media (max-width:1080px){
   .split{display:none}
   .hero{grid-template-columns:1fr;gap:0;padding-top:0;padding-bottom:0}
@@ -245,7 +199,7 @@ footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   .cover{position:relative;margin:0 calc(-1 * var(--gutter));padding:60px var(--gutter) 60px;background:linear-gradient(135deg,#0058D8,#0046C2)}
   .cover::before{content:"";position:absolute;left:0;right:0;top:-1px;height:18px;
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0h400v6C330 16 270 2 200 8S70 18 0 6Z' fill='%23fff'/%3E%3C/svg%3E") no-repeat top/100% 100%}
-  .cover ul{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .cover ol{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 }
 @media (max-width:1000px){
   .nav nav{display:none}
@@ -256,13 +210,9 @@ footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   :root{--gutter:28px}
   .nav{height:72px;gap:16px}
   .nav .brand img{height:42px}
-  .cover ul{grid-template-columns:1fr;gap:20px}
-  .services,.steps,.fit,.show{padding:72px 0}
-  .services h2,.steps h2,.fit h2,.show h2{font-size:40px}
-  .services .wrap{grid-template-columns:1fr;gap:40px}
-  .services .intro{position:static}
-  .flow{grid-template-columns:1fr;gap:32px;margin-top:40px}
-  .fit .wrap{grid-template-columns:1fr;gap:40px}
+  .cover ol{grid-template-columns:1fr;gap:20px}
+  .show{padding:72px 0}
+  .show h2{font-size:40px}
   .deck{margin:28px calc(-1 * var(--gutter)) 0}
   .slide{grid-template-columns:1fr;gap:24px;padding:4px var(--gutter) 36px}
   .topics{flex-direction:row;overflow-x:auto;gap:8px;scrollbar-width:none}
@@ -274,9 +224,9 @@ footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   .reach .ask{padding-top:0}
   .reach h2{font-size:40px}
   .drivers{padding:72px 0}
-  .drivers .wrap{grid-template-columns:1fr;gap:40px}
+  .drivers .wrap{grid-template-columns:1fr;gap:36px}
   .drivers h2{font-size:40px}
-  footer .cols{grid-template-columns:1fr 1fr;gap:32px}
+  .foot .reachout{margin-left:0;width:100%}
 }
 /* ---------- a phone ---------- */
 @media (max-width:560px){
@@ -289,17 +239,14 @@ footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   .lead .sub{font-size:18px}
   .acts .btn{width:100%}
   .btn{min-height:52px;padding:0 22px;font-size:16px}
-  .services h2,.steps h2,.fit h2,.show h2,.reach h2,.drivers h2{font-size:30px}
-  .services p.say,.fit p.say,.show p.say,.reach p.t{font-size:18px}
-  .svc li{grid-template-columns:44px minmax(0,1fr);gap:16px;padding:22px 0}
-  .svc li > svg{width:44px;height:44px;padding:11px}
-  .values{grid-template-columns:1fr}
-  .values li,.values li:nth-child(even){padding:20px 0 22px;border-left:0}
+  .show h2,.reach h2,.drivers h2{font-size:30px}
+  .show p.say,.reach p.t,.drivers p.t{font-size:18px}
   .deck-tab{padding:12px 12px;font-size:15px}
   .deck-pause span{display:none}
   .topic{flex-basis:86%}
   .form{padding:24px 20px}
   .two{grid-template-columns:1fr;gap:0}
+  .form > .two:first-child .f + .f{margin-top:16px}
   .direct a{font-size:17px}
-  footer .cols{grid-template-columns:1fr}
+  .foot{flex-direction:column;align-items:flex-start}
 }
