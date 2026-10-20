@@ -9,8 +9,8 @@
   /* ---------- small icons, drawn in lines like the rest of the page ---------- */
   var line = function (paths) { return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + paths + '</svg>'; };
   var ICON = {
-    /* the driver page: a truck-mounted forklift, pay, the week, a place */
-    forklift: line('<path d="M17 3v16h5M14 13h3"/><path d="M3 17v-6a2 2 0 0 1 2-2h4l3 4h2v4"/><path d="M8 9V5h4l2 4"/><circle cx="6" cy="19" r="2"/><circle cx="13" cy="19" r="2"/>'),
+    /* the driver page: pay, cash, the week, a place */
+    cash: line('<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>'),
     dollar: line('<circle cx="12" cy="12" r="9.5"/><path d="M15 9.3c-.6-1-1.7-1.5-3-1.5-1.8 0-3 .9-3 2.2 0 3 6 1.6 6 4.4 0 1.3-1.3 2.3-3 2.3-1.4 0-2.6-.6-3.2-1.6M12 6.3v1.5M12 16.7v1.5"/>'),
     calendar: line('<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2M8 17.5h2"/>'),
     pin: line('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>'),
