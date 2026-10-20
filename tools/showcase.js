@@ -22,9 +22,9 @@ const COPY = [
     ["Every route, by stage", "Offered, accepted, setting up, running: we see where each one stands."],
     ["A driver and a truck on each", "Every route shows the driver and the truck running it."],
     ["Gaps show up the same day", "A route missing its driver or truck turns amber, so it's handled before it's a problem."]] },
-  { tab: "Equipment", kicker: "Equipment", title: "Equipment ready to roll", topics: [
-    ["The right setup", "Every unit on record with its configuration: tractor, flatbed, Moffett."],
-    ["Ready before it rolls", "Every truck goes through the same steps, from sourcing to in service."],
+  { tab: "Fleet", kicker: "Fleet", title: "Equipment ready to roll", topics: [
+    ["The right setup", "Every unit on record with its configuration, its status and its paperwork."],
+    ["Ready before it rolls", "Every unit goes through the same steps, from sourcing to in service."],
     ["Inspections watched", "Registrations and inspections are flagged 30 days before they run out."]] },
   { tab: "Documents", kicker: "Documents", title: "Every paper in one place", topics: [
     ["All in one place", "CDLs, medical cards, insurance certificates, agreements. One list, nothing lost in a drawer."],
@@ -37,13 +37,19 @@ const COPY = [
     ["Cash, week by week", "Costs out, pay in, and the week it's back to even. So every route we take, we keep running."]] },
 ];
 if (COPY.length !== S.slides.length) throw new Error("slides.json has " + S.slides.length + " pictures, the words have " + COPY.length);
+/* the parts on the page. The owner's brief (2026-10-20): Tracker is shown as how we run, not as software for sale,
+   and not with our money (payroll, costs, profit). So the Forecast stays out for now; add "Financials" back here
+   to show it again */
+const SHOW = ["Drivers", "Routes", "Fleet", "Documents"];
+const PARTS = COPY.map((c, i) => ({ c, sl: S.slides[i] })).filter(p => SHOW.indexOf(p.c.tab) >= 0);
 
-const slideHtml = (sl, i) => {
+const slideHtml = (part, i) => {
+  const sl = part.sl;
   /* a highlight stays inside the picture, so its whole outline shows */
   const fit = t => { const x = Math.max(2, t.x), y = Math.max(2, t.y); return { x: x, y: y, w: Math.min(t.w - (x - t.x), sl.w - 2 - x), h: Math.min(t.h - (y - t.y), sl.h - 3 - y) }; };
   const r = t => { t = fit(t); return [pct(t.x, sl.w), pct(t.y, sl.h), pct(t.w, sl.w), pct(t.h, sl.h)]; };
-  const c = COPY[i], first = r(sl.topics[0]);
-  return `      <div class="slide" id="slide-${i}" role="tabpanel" aria-roledescription="slide" aria-label="${i + 1} of ${S.slides.length}: ${c.tab}">
+  const c = part.c, first = r(sl.topics[0]);
+  return `      <div class="slide" id="slide-${i}" role="tabpanel" aria-roledescription="slide" aria-label="${i + 1} of ${PARTS.length}: ${c.tab}">
         <div><span class="kicker">${c.kicker}</span><h3>${c.title}</h3>
           <div class="topics">${c.topics.map((t, k) => `<button type="button" class="topic${k === 0 ? " on" : ""}" aria-pressed="${k === 0}" data-r="${JSON.stringify(r(sl.topics[k]))}"><b>${t[0]}</b><span>${t[1]}</span><i class="time"></i></button>`).join("")}</div></div>
         <figure class="win"><div class="tb"><img src="assets/img/wave-small.png" alt="" width="81" height="22">SolidWave Tracker<span class="ctl" aria-hidden="true">&#8211;&nbsp;&nbsp;&#9633;&nbsp;&nbsp;&#215;</span></div>
@@ -52,22 +58,22 @@ const slideHtml = (sl, i) => {
 };
 
 const section = `<!-- showcase:start (written by tools/showcase.js from the app's pictures; change it there) -->
-<section class="show" id="how" aria-labelledby="howH">
+<section class="show" id="operation" aria-labelledby="howH">
   <div class="wrap">
-    <p class="eyebrow">How we run</p>
+    <p class="eyebrow">Our operation</p>
     <h2 class="display" id="howH">Every mile<br><span class="w">accounted for.</span></h2>
-    <p class="say">Every driver, route and truck we run lives in SolidWave Tracker, the system we built for our own operation. Here's a look inside.</p>
+    <p class="say">Behind every route we cover is SolidWave Tracker, the system we built to run our own operation. Drivers, vehicles, routes and paperwork are organized in one place, so coordination stays tight and every route stays accountable. Here's a look inside.</p>
     <div class="deck-bar">
-      <div class="deck-tabs" role="tablist" aria-label="Parts of SolidWave Tracker">${COPY.map((c, i) => `<button type="button" class="deck-tab" role="tab" id="tab-${i}" aria-controls="slide-${i}" aria-selected="${i === 0}">${c.tab}</button>`).join("")}</div>
+      <div class="deck-tabs" role="tablist" aria-label="Parts of SolidWave Tracker">${PARTS.map((p, i) => `<button type="button" class="deck-tab" role="tab" id="tab-${i}" aria-controls="slide-${i}" aria-selected="${i === 0}">${p.c.tab}</button>`).join("")}</div>
       <button type="button" class="deck-pause" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z" fill="currentColor"/></svg><svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg><span>Pause</span></button>
     </div>
     <div class="deck" aria-roledescription="carousel" aria-label="A look inside SolidWave Tracker">
       <div class="track">
-${S.slides.map(slideHtml).join("\n")}
+${PARTS.map(slideHtml).join("\n")}
       </div>
     </div>
-    <p class="fine">Real pages from our system. The names and numbers are examples.</p>
-    <div class="cta"><a class="btn btn-blue" href="#contact">Partner with us <i data-icon="arrow"></i></a><span>Want to see it live? <b>We'll walk you through it.</b></span></div>
+    <p class="fine">Real pages from our internal system. The names and numbers are examples.</p>
+    <div class="cta"><a class="btn btn-blue" href="#contact">Partner with SolidWave <i data-icon="arrow"></i></a><span>Want to see how we'd run your routes? <b>We'll walk you through it.</b></span></div>
   </div>
 </section>
 <!-- showcase:end -->`;
@@ -78,4 +84,4 @@ const a = page.indexOf("<!-- showcase:start"), b = page.indexOf("<!-- showcase:e
 if (a < 0 || b < 0) throw new Error("index.html has no showcase markers");
 page = page.slice(0, a) + section + page.slice(b + "<!-- showcase:end -->".length);
 fs.writeFileSync(file, page);
-console.log("index.html: the slideshow written (" + S.slides.length + " parts of the app)");
+console.log("index.html: the slideshow written (" + PARTS.length + " parts of the app)");

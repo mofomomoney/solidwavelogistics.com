@@ -1,57 +1,28 @@
-/* Solid Wave Logistics — the website's script: the truck drawing and icons, the slideshow of SolidWave Tracker,
-   and the driver application. */
+/* SolidWave Logistics — the website's script: the icons, the slideshow of SolidWave Tracker, and the two forms
+   (a business's request for route coverage, and the driver application). */
 (function () {
   "use strict";
 
   /* ---------- how to reach us: the one place these are kept (README.txt says what to change) ---------- */
   var CONTACT = { email: "info@solidwavelogistics.com", phone: "" };
 
-  /* ---------- drawings: the tractor with its flatbed trailer and Moffett, and small icons ---------- */
-  var wheel = function (x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--tire)"/><circle cx="' + x + '" cy="' + y + '" r="9" fill="var(--hub)"/>'; };
-  var lumber = function (x, y, w, h) {
-    return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" fill="var(--load)"/>'
-      + '<path d="M' + x + ' ' + (y + h / 3) + 'H' + (x + w) + 'M' + x + ' ' + (y + 2 * h / 3) + 'H' + (x + w) + '" stroke="var(--load-2)" stroke-width="2"/>';
-  };
-  var drywall = function (x, y, w, h) {
-    return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" fill="var(--load-2)"/>'
-      + '<path d="M' + x + ' ' + (y + 6) + 'H' + (x + w) + 'M' + x + ' ' + (y + 12) + 'H' + (x + w) + 'M' + x + ' ' + (y + 18) + 'H' + (x + w) + '" stroke="var(--load)" stroke-width="1.5"/>';
-  };
-  var strap = function (x, y, h) { return '<rect x="' + x + '" y="' + y + '" width="5" height="' + h + '" rx="1" fill="var(--strap)"/>'; };
-  var cab = function (dx) {
-    return '<g transform="translate(' + dx + ',0)">'
-      + '<path d="M0 134V60Q0 46 14 46H80Q93 46 101 56L140 102Q147 109 156 111V138Q156 144 150 144H0Z" fill="var(--body)"/>'
-      + '<path d="M50 56H78Q85 56 90 62L122 100H50Z" fill="var(--glass)"/>'
-      + '<path d="M42 56V134" stroke="var(--seam)" stroke-width="2"/>'
-      + '<path d="M6 124C46 106 92 106 150 120" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round"/>'
-      + '<rect x="140" y="136" width="24" height="10" rx="3" fill="var(--body)"/><rect x="146" y="116" width="9" height="7" rx="2" fill="var(--accent)"/></g>';
-  };
-  var ART = {
-    tractor: '<svg viewBox="0 0 980 190" role="img" aria-label="A tractor pulling a flatbed trailer loaded with lumber and drywall, with a truck-mounted forklift on the back">'
-      + '<ellipse cx="490" cy="174" rx="470" ry="8" fill="var(--shadow)"/>'
-      /* the truck-mounted forklift (Moffett) on the back of the trailer */
-      + '<path d="M28 98V70H60V98" stroke="var(--body)" stroke-width="5" fill="none" stroke-linejoin="round"/>'
-      + '<rect x="20" y="96" width="48" height="36" rx="5" fill="var(--accent)"/><rect x="68" y="46" width="8" height="94" rx="2" fill="var(--body)"/>'
-      + '<rect x="76" y="126" width="26" height="5" rx="1" fill="var(--body)"/>'
-      + '<circle cx="32" cy="146" r="11" fill="var(--tire)"/><circle cx="58" cy="146" r="11" fill="var(--tire)"/>'
-      /* the trailer and its load */
-      + '<rect x="98" y="110" width="572" height="14" rx="2" fill="var(--deck)"/><rect x="98" y="124" width="572" height="8" fill="var(--body)"/>'
-      + lumber(112, 74, 150, 36) + strap(148, 70, 42) + strap(222, 70, 42)
-      + lumber(274, 74, 150, 36) + strap(310, 70, 42) + strap(384, 70, 42)
-      + drywall(436, 86, 150, 24) + strap(506, 82, 30)
-      + '<rect x="560" y="132" width="6" height="26" fill="var(--body)"/><rect x="552" y="156" width="22" height="5" rx="2" fill="var(--body)"/>'
-      + wheel(160, 150) + wheel(216, 150)
-      /* the tractor */
-      + '<rect x="610" y="128" width="320" height="10" fill="var(--body)"/><rect x="700" y="126" width="46" height="18" rx="7" fill="var(--hub)"/>'
-      + '<rect x="752" y="18" width="7" height="64" rx="2" fill="var(--hub)"/>'
-      + cab(764) + wheel(652, 150) + wheel(706, 150) + wheel(884, 150) + '</svg>'
-  };
+  /* ---------- small icons, drawn in lines like the rest of the page ---------- */
+  var line = function (paths) { return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + paths + '</svg>'; };
   var ICON = {
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
-    mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+    phone: line('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
+    mail: line('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'),
+    /* a route: from one stop to the next */
+    route: line('<circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8"/>'),
+    /* a vehicle, no particular kind */
+    truck: line('<path d="M2.5 6.5h11v10h-11zM13.5 10h4.2l3.3 3.4v3.1h-7.5"/><circle cx="6.5" cy="17.5" r="1.9"/><circle cx="17" cy="17.5" r="1.9"/>'),
+    driver: line('<circle cx="12" cy="7.5" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.9-6.3 7.5-6.3s6.7 2.4 7.5 6.3"/>'),
+    /* the day's operation: a checklist */
+    ops: line('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 10.5l1.6 1.6 3-3M8.5 16h7"/>'),
+    /* growing as needed */
+    scale: line('<path d="M3 20.5h18M6 20.5v-5M11 20.5v-9M16 20.5V7M14 6.5l2-2.5 2 2.5"/>')
   };
-  document.querySelectorAll("[data-art]").forEach(function (el) { el.innerHTML = ART[el.dataset.art] || ""; });
   document.querySelectorAll("[data-icon]").forEach(function (el) { el.outerHTML = ICON[el.dataset.icon] || ""; });
 
   /* ---------- how to reach us, filled in wherever the page asks for it ---------- */
@@ -60,11 +31,12 @@
     var k = el.dataset.contact;
     if (k === "email") { el.href = "mailto:" + CONTACT.email; var t = el.querySelector("[data-text]"); if (t) t.textContent = CONTACT.email; }
     if (k === "phone") {
-      /* no phone number yet: its button (and its line in the footer) stays off the page */
+      /* no phone number yet: its link (and its line) stays off the page */
       if (!tel) { el.hidden = true; if (el.parentElement.tagName === "LI") el.parentElement.hidden = true; return; }
       el.href = "tel:" + tel; var p = el.querySelector("[data-text]"); if (p) p.textContent = CONTACT.phone;
     }
   });
+  document.querySelectorAll("[data-email]").forEach(function (el) { el.textContent = CONTACT.email; });
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   /* ---------- the slideshow: the lit topic moves on every few seconds; after the last one, the next part of the
@@ -127,29 +99,88 @@
     requestAnimationFrame(frame);
   }
 
-  /* ---------- the driver application. Until applications go straight into SolidWave Tracker, sending one opens
-     the driver's email with it filled in, addressed to us ---------- */
-  var form = document.getElementById("apply");
-  if (form) {
+  /* ---------- the forms. There's no server behind the site yet, so sending one opens the visitor's own email
+     with everything filled in, addressed to us; if their email doesn't open, they can copy it and send it
+     themselves. Each box says what's wrong right under it ---------- */
+  var digits = function (v) { return v.replace(/\D/g, "").length; };
+  var FORMS = {
+    inquire: {
+      what: "request",
+      checks: {
+        name: function (v) { return v.length >= 2 ? "" : "Enter your name."; },
+        org: function (v) { return v.length >= 2 ? "" : "Enter your company's name."; },
+        email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? "" : v ? "Check the email address, like name@company.com." : "Enter your email address."; },
+        phone: function (v) { return !v || digits(v) >= 10 ? "" : "Enter all 10 digits, or leave it empty."; },
+        region: function (v) { return v.length >= 2 ? "" : "Enter where your routes run."; },
+        details: function (v) { return v.length >= 10 ? "" : "Tell us a little about your routes."; }
+      },
+      subject: function (v) { return "Route coverage request: " + v.org; },
+      body: function (v) { return ["Contact name: " + v.name, "Company: " + v.org, "Email: " + v.email, "Phone: " + (v.phone || "(not given)"),
+        "Service location or region: " + v.region, "", "Route requirements:", v.details].join("\n"); }
+    },
+    apply: {
+      what: "application",
+      checks: {
+        name: function (v) { return v.length >= 2 ? "" : "Enter your full name."; },
+        phone: function (v) { return digits(v) >= 10 ? "" : v ? "Enter all 10 digits of your phone number." : "Enter your phone number."; },
+        where: function (v) { return v.length >= 2 ? "" : "Enter your city or ZIP code."; },
+        license: function (v) { return v ? "" : "Choose the license you have."; },
+        years: function (v) { return v ? "" : "Choose how long you've driven for work."; },
+        equipment: function () { return ""; }
+      },
+      subject: function (v) { return "Driver application: " + v.name; },
+      body: function (v) { return ["Name: " + v.name, "Phone: " + v.phone, "City or ZIP: " + v.where, "License: " + v.license,
+        "Years driving for work: " + v.years, "Equipment driven: " + (v.equipment || "(not given)")].join("\n"); }
+    }
+  };
+  var mark = function (el, err) {
+    var box = el.closest(".f"), id = el.id + "-err", small = document.getElementById(id);
+    el.setAttribute("aria-invalid", err ? "true" : "false");
+    if (err) {
+      if (!small) { small = document.createElement("small"); small.className = "err"; small.id = id; box.appendChild(small); }
+      small.textContent = err; el.setAttribute("aria-describedby", id);
+    } else if (small) { small.remove(); el.removeAttribute("aria-describedby"); }
+  };
+  /* the email app opens by following a mailto: link; the page checks can watch it instead */
+  var openMail = function (href) { if (window.__openMail) window.__openMail(href); else window.location.href = href; };
+  var copyText = function (text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (ok, fail) {
+      var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select(); var done = false; try { done = document.execCommand("copy"); } catch (e) { done = false; } ta.remove(); done ? ok() : fail();
+    });
+  };
+  Object.keys(FORMS).forEach(function (fid) {
+    var form = document.getElementById(fid), F = FORMS[fid]; if (!form) return;
     var msg = form.querySelector(".msg");
-    var say = function (text, good) { msg.textContent = text; msg.className = "msg " + (good ? "good" : "bad"); };
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var E = form.elements;
-      if (E.company && E.company.value) return;   /* only a robot fills in the hidden box */
-      var name = E.name.value.trim(), phone = E.phone.value.trim(), where = E.where.value.trim(), years = E.years.value, moffett = E.moffett.value;
-      var bad = [];
-      [["name", name.length >= 2], ["phone", phone.replace(/\D/g, "").length >= 10], ["where", where.length >= 2], ["years", !!years], ["moffett", !!moffett]].forEach(function (c) {
-        E[c[0]].setAttribute("aria-invalid", c[1] ? "false" : "true"); if (!c[1]) bad.push(c[0]);
+      if (E.website && E.website.value) return;   /* only a robot fills in the hidden box */
+      var v = {}, bad = [];
+      Object.keys(F.checks).forEach(function (k) {
+        var el = E[k]; v[k] = el.value.trim();
+        var err = F.checks[k](v[k]); mark(el, err); if (err) bad.push(el);
       });
       if (bad.length) {
-        say(bad.indexOf("phone") >= 0 && phone ? "Check the phone number: it needs all 10 digits." : "Fill in every box, please.", false);
-        E[bad[0]].focus(); return;
+        msg.className = "msg bad";
+        msg.textContent = bad.length === 1 ? "One box needs a fix: it's marked above." : bad.length + " boxes need a fix: they're marked above.";
+        bad[0].focus(); return;
       }
-      var body = ["Name: " + name, "Phone: " + phone, "City or ZIP: " + where, "Years with a Class A: " + years, "Moffett experience: " + moffett].join("\n");
-      window.location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Driver application: " + name) + "&body=" + encodeURIComponent(body + "\n");
-      say("Your email opened with your application filled in. Press Send and we'll call you." + (tel ? " No email? Call or text " + CONTACT.phone + "." : ""), true);
+      var body = F.body(v), subject = F.subject(v);
+      openMail("mailto:" + CONTACT.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body + "\n"));
+      /* what happens next, and what to do if no email app opened */
+      msg.className = "msg good"; msg.textContent = "";
+      var b = document.createElement("b"); b.textContent = "Almost done: your email app should have opened with your " + F.what + " filled in. Press Send there.";
+      var p = document.createElement("span"); p.textContent = "Nothing opened? Copy your " + F.what + " and email it to ";
+      var a = document.createElement("a"); a.href = "mailto:" + CONTACT.email; a.textContent = CONTACT.email;
+      var c = document.createElement("button"); c.type = "button"; c.className = "copy"; c.textContent = "Copy my " + F.what;
+      c.addEventListener("click", function () {
+        copyText("To: " + CONTACT.email + "\nSubject: " + subject + "\n\n" + body).then(function () { c.textContent = "Copied"; }, function () { c.textContent = "Couldn't copy: select the text in the boxes instead"; });
+      });
+      msg.append(b, p, a, document.createTextNode(". "), c);
     });
-    form.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true") e.target.setAttribute("aria-invalid", "false"); });
-  }
+    form.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true") mark(e.target, ""); });
+    form.addEventListener("change", function (e) { if (e.target.tagName === "SELECT" && e.target.value && e.target.getAttribute("aria-invalid") === "true") mark(e.target, ""); });
+  });
 })();

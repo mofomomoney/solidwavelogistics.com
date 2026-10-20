@@ -30,7 +30,7 @@ app.whenReady().then(async () => {
     h1{font:800 62px/1.02 "Saira",sans-serif;font-stretch:125%;text-transform:uppercase;letter-spacing:.004em}
     h1 span{color:#3EA0FF}
     p{font-size:26px;color:#C9D6EA;margin-top:18px}</style></head>
-    <body><img src="${logo}" alt=""><div><h1>The last-mile partner<br><span>contractors count on.</span></h1><p>Vetted Class A drivers and the equipment each route needs.</p></div></body></html>`;
+    <body><img src="${logo}" alt=""><div><h1>Your routes.<br><span>Our responsibility.</span></h1><p>Fleet and driver solutions for contracted route coverage.</p></div></body></html>`;
   const tmp = path.join(require("os").tmpdir(), "solidwave-og.html");
   fs.writeFileSync(tmp, html);
   const win = new BrowserWindow({ show: false, width: 1200, height: 630, useContentSize: true, webPreferences: { backgroundThrottling: false } });

@@ -4,26 +4,37 @@ The company website for solidwavelogistics.com (bought by the owner at Porkbun o
 October). One page, no build step: index.html, assets/css/site.css and assets/js/site.js. It's kept here, outside
 OneDrive, like the app (ProjectTrackerDesktop), with its history in git.
 
-THE PAGE, TOP TO BOTTOM (the owner's picks from the mockups, 2026-10-19)
-  - The top: two doors split by the logo's wave. For contractors ("Your routes, covered.", Partner with us) and
-    for CDL drivers ("Drive local. Day-rate pay.", Apply in two minutes). On a phone they stack, with the wave
-    between them.
-  - Our mission: "The last-mile partner contractors count on.", the tractor + flatbed + Moffett drawing (drawn
-    in site.js), Safety first / On time / Care on every drop.
-  - How we run: "Every mile accounted for." A slideshow of SolidWave Tracker (the owner's own app): Drivers,
-    Routes, Equipment, Documents, Financials (its Forecast tab, the owner's favorite part), three selling points
-    each. Every 4.5 seconds the next point lights
-    up on the real app picture; after the third, the whole section slides to the next part, and after Financials
-    it starts over. It waits while it's pointed at or off screen, has Pause/Play, and doesn't move on its own for
-    people who turn motion off. Written by tools/showcase.js (see below).
-  - Partner with us (#contact): how to reach us. The Call button shows only once there's a phone number.
-  - Drive with us (#drive): the driver application.
+THE PAGE, TOP TO BOTTOM (rebuilt 2026-10-20 from the owner's brief; businesses first, drivers second)
+  - The top: "Your routes. Our responsibility." with Partner with SolidWave (main) and Drive with SolidWave.
+    On the logo's wave to the right: what we take on (the vehicles, the drivers, the daily operation). On a
+    phone the wave part sits under the words, on the blue.
+  - What we do (#services): the five services as plain lines with icons: route coverage, fleet solutions, driver
+    management, operations management, scalable solutions.
+  - How we work (#how-we-work): the three steps of a partnership.
+  - Why SolidWave (#why): "Built around your operation." Flexible, reliable, in touch, accountable.
+  - Our operation (#operation): "Every mile accounted for." A slideshow of SolidWave Tracker, shown as how we
+    run (not software for sale, and not our money): Drivers, Routes, Fleet, Documents, three points each. Every
+    4.5 seconds the next point lights up on the real app picture; after the third, the whole section slides to
+    the next part. It waits while it's pointed at or off screen, has Pause/Play, and doesn't move on its own for
+    people who turn motion off. Written by tools/showcase.js (see below); the Forecast picture is kept there,
+    out of the list (SHOW), until the owner wants it back.
+  - Let's cover your routes (#contact): the request form (contact name, company, email, phone if they like,
+    where, what the routes need, in their own words) and the email link. The Call link shows only once there's
+    a phone number.
+  - Drive with SolidWave (#drive): the driver application (license, years, equipment in their own words).
   - The bottom: the links, the email, the year.
+  Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
+  opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
+  it. (Applications going straight into SolidWave Tracker is waiting on the owner.)
 
-WHAT SOLID WAVE IS (so the words stay right)
-  A last-mile SUBCONTRACTOR. Contractors hold the routes and hand them down; Solid Wave brings vetted Class A
-  drivers (no CDL B) and whatever equipment the job is missing, anywhere. Never write as if Solid Wave owns
-  routes or a fleet, and don't explain last-mile basics to contractors.
+WHAT SOLIDWAVE IS (so the words stay right; the owner's brief, 2026-10-20)
+  An outsourced fleet and driver operations partner for contracted route coverage: a business needs delivery
+  routes covered, and SolidWave supplies and manages the vehicles and drivers to cover them. Not defined by any
+  kind of truck or a fleet on hand (whatever equipment the routes need), and not a trucking company, rental
+  business, broker or staffing agency. Drivers: what a role needs depends on the route and its equipment (not
+  Class A only). Don't invent testimonials, years in business, fleet sizes, statistics, coverage areas or
+  guarantees; Tracker is shown as how we run, without our payroll, costs or profit, and without promising
+  customers tracking or GPS.
 
 CHANGING THINGS
   - The phone number and email: CONTACT at the top of assets/js/site.js. Every button and link that shows them
