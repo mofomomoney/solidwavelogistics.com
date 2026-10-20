@@ -25,7 +25,7 @@ const COPY = [
     [1, "A driver and a truck on each", "Every route shows who's driving it and what they're driving."],
     [2, "Gaps caught the same day", "A route missing its driver or truck is flagged before it becomes a problem.", [0.35, 0.397, 2]]] },
   { tab: "Fleet", kicker: "Fleet", title: "Equipment ready to roll", topics: [
-    [1, "Ready before it rolls", "Every unit goes through the same steps, from sourcing to in service.", [0.48, 0.23, 1.6]],
+    [1, "Ready before it rolls", "Every unit goes through the same steps, from sourcing to its first route.", [0.48, 0.23, 1.6]],
     [0, "Every unit on record", "Each truck and trailer with its configuration, status and paperwork.", [0.27, 0.11, 1.8]]] },
   { tab: "Documents", kicker: "Documents", title: "Every paper in one place", topics: [
     [0, "All in one place", "CDLs, medical cards, insurance certificates, agreements. One list, nothing lost in a drawer."],

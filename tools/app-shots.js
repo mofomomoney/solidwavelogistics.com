@@ -87,9 +87,10 @@ async function run() {
     slides.push({ img: "slide-routes.png", w: 1304, h: 931, topics: [rel(await R("#lTabs"), box, 8), rel(cols, box), rel(gap, box, 2)] });
   }
 
-  /* 3. Equipment: a truck's page (T-01, in service) */
+  /* 3. Equipment: a truck's page (T-01, in service), named the way the owner wants it shown (2026-10-20: "for the
+     truck write Tandem Axle Tractor-Trailer instead of T-01") */
   if (want("equipment")) {
-    await js(`go("trucks"); await new Promise(r=>setTimeout(r,300)); openSheet("truck", S.trucks.find(x=>x.unit==="T-01").id); await new Promise(r=>setTimeout(r,700)); if(document.activeElement) document.activeElement.blur();`);
+    await js(`const t1=S.trucks.find(x=>x.unit==="T-01"); t1.unit="Tandem Axle Tractor-Trailer"; save(); go("trucks"); await new Promise(r=>setTimeout(r,300)); openSheet("truck", t1.id); await new Promise(r=>setTimeout(r,700)); if(document.activeElement) document.activeElement.blur();`);
     sheet = await R("#sheet .sheet") || await R(".sheet"); box = { x: sheet.x, y: sheet.y, w: 1260, h: 900 };
     await shoot("slide-equipment", box);
     const title = await js(`const a=document.querySelector("#sheet .sh-ident").getBoundingClientRect(), b=document.querySelector("#sheet .sh-tt").getBoundingClientRect(); return {x:a.left-8, y:a.top-8, w:(b.right)-(a.left)+24, h:Math.max(a.height,b.height)+16};`);
