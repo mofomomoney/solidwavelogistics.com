@@ -55,6 +55,9 @@ async function check(name, W, H, page) {
   /* the slideshow moves on by itself once it's on screen */
   const moved = await js(`const s=document.querySelector(".deck"); if(!s) return null; s.scrollIntoView({block:"center"}); await new Promise(r=>setTimeout(r,8000));
     return [].slice.call(document.querySelectorAll("#slide-0 .topic")).findIndex(b=>b.classList.contains("on"));`);
+  /* the fan of app pages takes turns: after a few seconds on screen, another card is in front */
+  const fanTurns = await js(`const f=document.querySelector(".fan"); if(!f) return null; f.scrollIntoView({block:"center"}); const front=()=>{ const i=f.querySelector(".s-front"); return i ? i.getAttribute("src") : ""; };
+    const a=front(); await new Promise(r=>setTimeout(r,4600)); return a!==front();`);
   const forms = await js(`window.__openMail=h=>{ window.__mailed=h; };
     const out={}, set=(f,k,v)=>{ const e=f.elements[k]; e.value=v; e.dispatchEvent(new Event("input",{bubbles:true})); e.dispatchEvent(new Event("change",{bubbles:true})); };
     const run=(id, good, wrong)=>{
@@ -79,7 +82,7 @@ async function check(name, W, H, page) {
   const im = await win.webContents.capturePage(undefined, { stayHidden: true });
   fs.writeFileSync(path.join(OUT, page.replace(".html", "") + "-" + name + ".png"), im.toPNG());
   win.destroy();
-  return { page, size: name + " " + W + "px", ...info, slideshowMovedTo: moved == null ? "-" : moved + 1, forms, errors: errors.length ? errors : "none" };
+  return { page, size: name + " " + W + "px", ...info, slideshowMovedTo: moved == null ? "-" : moved + 1, fanTurns: fanTurns == null ? "-" : fanTurns, forms, errors: errors.length ? errors : "none" };
 }
 
 app.whenReady().then(async () => {

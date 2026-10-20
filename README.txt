@@ -14,7 +14,9 @@ something new; then "put the tracker on a separate page on its own")
     (contracted route coverage; fleet and driver solutions; daily operations management), and on navy "Why
     subcontract your routes to SolidWave?" with its paragraph and six points. No savings claims or guarantees.
   - Our operation (#operation): "Our operation. Our technology." with the Built in-house label, what Tracker is,
-    and See SolidWave Tracker (its own page).
+    and See SolidWave Tracker (its own page). Beside it, three app pages fanned out like a hand of cards that take
+    turns in front every 2 seconds (the owner's idea; still for people who turn motion off). The card pictures are
+    small copies made by tools/make-cards.js.
   - Let's cover your routes (#contact): the request form and the email link.
   - Drive with SolidWave (#drive): one line and Apply now (the application is drive.html).
   - The bottom: logo, links, the email, the year.

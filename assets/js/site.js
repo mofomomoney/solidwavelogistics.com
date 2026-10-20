@@ -147,6 +147,22 @@
     requestAnimationFrame(frame);
   }
 
+  /* ---------- the fan of app pages on the homepage: every 2 seconds the front card goes to the back and the next one
+     comes forward. Not while pointed at, off screen, or for people who turn motion off ---------- */
+  var fan = document.querySelector(".fan");
+  if (fan && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    var cards = [].slice.call(fan.querySelectorAll("img")), slots = ["s-left", "s-right", "s-front"], turn = 0, fanHover = false, fanSeen = false;
+    var deal = function () {
+      turn = (turn + 1) % slots.length;
+      cards.forEach(function (c, i) { c.classList.remove("s-left", "s-right", "s-front"); c.classList.add(slots[(i + turn) % slots.length]); });
+    };
+    fan.addEventListener("mouseenter", function () { fanHover = true; });
+    fan.addEventListener("mouseleave", function () { fanHover = false; });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { fanSeen = es[0].isIntersecting; }, { threshold: .3 }).observe(fan);
+    else fanSeen = true;
+    setInterval(function () { if (fanSeen && !fanHover && !document.hidden) deal(); }, 2000);
+  }
+
   /* ---------- the forms. There's no server behind the site yet, so sending one opens the visitor's own email
      with everything filled in, addressed to us; if their email doesn't open, they can copy it and send it
      themselves. Each box says what's wrong right under it ---------- */
