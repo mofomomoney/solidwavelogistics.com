@@ -1,0 +1,259 @@
+/* Solid Wave Logistics — the website's look, taken from the logo (see README.txt).
+   Navy "SOLID", the blues of "WAVE", the silver of its highlight; Saira at its widest for headings (close to the
+   logo's letters), IBM Plex Sans for text (the same as SolidWave Tracker), IBM Plex Mono for small labels. */
+:root{
+  --navy:#001334;      /* "SOLID" */
+  --navy-2:#0A2552;
+  --navy-3:#163A73;
+  --blue:#0069EC;      /* the middle of "WAVE" */
+  --blue-deep:#0046C2; /* the bottom of "WAVE" */
+  --blue-light:#0086FC;/* the crest */
+  --silver:#D1D5DB;    /* the wave's highlight */
+  --paper:#F4F6F9;
+  --line:#DCE2EA;
+  --ink:#0B1730;
+  --slate:#475872;
+  --display:"Saira","Arial Black",sans-serif;
+  --sans:"IBM Plex Sans","Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",Consolas,monospace;
+  --gutter:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:96px}
+body{font:400 18px/1.55 var(--sans);color:var(--ink);background:#fff}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:3px solid var(--blue-light);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:12px;top:-80px;z-index:50;padding:10px 16px;border-radius:8px;background:var(--blue);color:#fff;font-weight:600}
+.skip:focus{top:12px}
+[hidden]{display:none!important}   /* a button kept off the page (no phone number yet) stays off, whatever its style */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* the logo's own letters: wide, heavy capitals */
+.display{font-family:var(--display);font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:.004em;line-height:.98}
+/* like the logo's "— L O G I S T I C S —" line */
+.eyebrow{font:600 13px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:10px;font:600 17px var(--sans);
+  border:2px solid transparent;white-space:nowrap;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.btn svg{width:18px;height:18px;flex:0 0 auto}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--blue-deep)}
+.btn-white{background:#fff;color:var(--navy)}
+.btn-white:hover{background:#E8F1FF}
+.btn-line-light{border-color:rgba(255,255,255,.7);color:#fff}
+.btn-line-light:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+/* ---------- the top bar: the logo, the sections, Partner with us ---------- */
+.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:40px;height:84px}
+.nav .brand img{height:50px;width:auto}
+.nav nav{display:flex;gap:30px;margin-left:auto;font:500 16px var(--sans);color:var(--navy)}
+.nav nav a{padding:10px 0}
+.nav nav a:hover{color:var(--blue)}
+.nav .btn{min-height:46px;padding:0 20px;font-size:15px}
+
+/* ---------- the top: two doors split by the logo's wave (contractors on the left, drivers on the right) ---------- */
+.top{position:relative;overflow:hidden;background:#fff}
+.split{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.doors{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:120px;padding-top:72px;padding-bottom:112px}
+.door .eyebrow{margin-bottom:18px}
+.door h1,.door h2{font-size:46px}
+.door ul{list-style:none;margin:28px 0 34px;display:grid;gap:14px}
+.door li{display:flex;gap:12px;align-items:center;font-size:18px;font-weight:500}
+.door li svg{width:20px;height:20px;flex:0 0 auto}
+.left .eyebrow{color:var(--blue-deep)}
+.left h1{color:var(--navy)}
+.left h1 .w{color:var(--blue)}
+.left li{color:var(--ink)}
+.left li svg{color:var(--blue)}
+.right{color:#fff;padding-left:16px}
+.right .eyebrow{color:#CFE2FF}
+.right h2 .w{color:#BFE0FF}
+.right li svg{color:#fff}
+
+/* ---------- the mission, with the tractor, trailer and Moffett big under it ---------- */
+.pitch{background:var(--paper);padding:104px 0 96px}
+.pitch .eyebrow{color:var(--blue-deep);margin-bottom:16px}
+.pitch h2{font-size:56px;color:var(--navy)}
+.pitch h2 .w{color:var(--blue)}
+.pitch p.say{margin-top:26px;font-size:22px;line-height:1.6;color:var(--ink);max-width:940px}
+.art svg{display:block;width:100%;height:auto}
+.art{--body:var(--navy);--glass:#A9CEFF;--deck:var(--blue-deep);--load:#C9CED6;--load-2:#E4E8EE;--strap:var(--navy);--tire:#0B1730;--hub:#C9CED6;--accent:var(--blue-light);--shadow:rgba(0,19,52,.10);--seam:rgba(255,255,255,.18)}
+.pitch .rig{margin-top:56px}
+.pitch .road{height:3px;background:var(--line);margin-top:-12px;border-radius:2px}
+.pitch .ways{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px}
+.pitch .way{padding-right:36px}
+.pitch .way + .way{padding-left:36px;border-left:1px solid var(--line)}
+.pitch .way b{display:block;font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy);margin-bottom:10px}
+.pitch .way span{color:var(--slate);font-size:17px}
+.pitch .btn{margin-top:48px}
+
+/* ---------- How we run: SolidWave Tracker, shown as a slideshow ---------- */
+.show{background:#fff;padding:104px 0 100px}
+.show .eyebrow{color:var(--blue-deep);margin-bottom:16px}
+.show h2{font-size:56px;color:var(--navy)}
+.show h2 .w{color:var(--blue)}
+.show p.say{margin-top:22px;font-size:21px;line-height:1.6;color:var(--ink);max-width:860px}
+/* which part of the app is showing, and Pause */
+.deck-bar{display:flex;align-items:center;gap:4px;margin-top:48px;border-bottom:1px solid var(--line)}
+.deck-tabs{display:flex;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.deck-tabs::-webkit-scrollbar{display:none}
+.deck-tab{position:relative;flex:0 0 auto;padding:14px 18px;font:700 16px var(--sans);color:var(--slate);background:none;border:0;cursor:pointer}
+.deck-tab:hover{color:var(--navy)}
+.deck-tab[aria-selected="true"]{color:var(--navy)}
+.deck-tab[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:3px;border-radius:2px;background:var(--blue)}
+.deck-pause{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;height:38px;margin-bottom:8px;padding:0 14px;border:1.5px solid var(--line);border-radius:9px;
+  background:#fff;font:600 14px var(--sans);color:var(--navy);cursor:pointer}
+.deck-pause:hover{border-color:var(--blue)}
+.deck-pause svg{width:14px;height:14px}
+.deck-pause[aria-pressed="false"] .ic-play,.deck-pause[aria-pressed="true"] .ic-pause{display:none}
+/* the parts of the app side by side; the whole row slides to the next one. Room around each slide, so a
+   window's shadow never shows on the slide beside it */
+.deck{overflow:hidden;margin:40px -56px 0}
+.track{display:flex;transition:transform .8s cubic-bezier(.65,0,.35,1)}
+.slide{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:310px 1fr;gap:56px;align-items:center;padding:4px 56px 44px}
+.slide .kicker{display:block;font:600 13px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:10px}
+.slide h3{font:800 25px/1.1 var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy);margin-bottom:22px}
+.topics{display:flex;flex-direction:column;gap:6px}
+.topic{position:relative;display:block;width:100%;padding:16px 18px 18px 20px;border:0;border-left:4px solid var(--line);background:none;text-align:left;font:inherit;
+  color:var(--slate);cursor:pointer;overflow:hidden}
+.topic b{display:block;font:800 17px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:#6E7F99}
+.topic span{display:block;margin-top:6px;font-size:16px;line-height:1.5}
+.topic:hover b{color:var(--navy)}
+.topic.on{border-left-color:var(--blue);background:var(--paper)}
+.topic.on b{color:var(--navy)}
+.topic.on span{color:var(--ink)}
+/* how long until the next topic: a thin line filling along its bottom */
+.topic .time{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--blue-light)}
+/* the app's window, with the app's own navy title bar */
+.win{position:relative;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 34px 70px -28px rgba(0,19,52,.45),0 0 0 1px rgba(0,19,52,.12)}
+.win .tb{height:40px;background:var(--navy);display:flex;align-items:center;gap:10px;padding:0 16px;color:#B4C4DC;font:600 13px var(--sans)}
+.win .tb img{height:22px;width:auto}
+.win .tb .ctl{margin-left:auto;display:flex;gap:20px;color:#93A9CB;font-size:15px;letter-spacing:.05em}
+.pic{position:relative;line-height:0;aspect-ratio:1260/900;overflow:hidden;background:var(--paper)}
+.pic img{width:100%;height:auto}
+/* the lit part: everything else dimmed around it; it glides from topic to topic */
+.lit{position:absolute;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,19,52,.5);outline:3px solid var(--blue-light);
+  transition:left .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1)}
+.show .fine{font-size:14px;color:var(--slate);margin-top:6px}
+.show .cta{display:flex;align-items:center;gap:22px;margin-top:36px;flex-wrap:wrap}
+.show .cta span{color:var(--slate);font-size:17px}
+.show .cta span b{color:var(--navy)}
+
+/* ---------- Partner with us: how to reach us, on the logo's blue ---------- */
+.reach{background:linear-gradient(135deg,var(--blue-deep),var(--blue));color:#fff;padding:96px 0}
+.reach .wrap{display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center}
+.reach .eyebrow{color:#CFE2FF;margin-bottom:16px}
+.reach h2{font-size:52px}
+.reach h2 .w{color:#BFE0FF}
+.reach p.t{margin-top:20px;font-size:20px;line-height:1.6;color:#E3EEFF;max-width:640px}
+.reach .ways{display:grid;gap:14px;min-width:340px}
+.reach .ways .btn{justify-content:flex-start;padding:0 24px}
+
+/* ---------- drivers: the application right on the page ---------- */
+.drivers{background:var(--navy);color:#fff;padding:96px 0}
+.drivers .wrap{display:grid;grid-template-columns:1fr 500px;gap:80px;align-items:center}
+.drivers .eyebrow{color:#9FC3FF}
+.drivers h2{font-size:52px;margin-top:14px}
+.drivers h2 .w{color:#3EA0FF}
+.drivers p.t{margin-top:18px;font-size:19px;color:#C9D6EA;max-width:520px}
+.drivers ul{list-style:none;margin-top:28px;display:grid;gap:12px}
+.drivers li{display:flex;gap:12px;align-items:center;font-size:18px}
+.drivers li svg{width:20px;height:20px;color:#3EA0FF;flex:0 0 auto}
+.form{background:#fff;color:var(--ink);border-radius:18px;padding:32px}
+.form h3{font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
+.form p.s{color:var(--slate);font-size:15px;margin-top:6px}
+.f{display:block;margin-top:16px}
+.f > span{display:block;font:600 14px var(--sans);color:var(--slate);margin-bottom:6px}
+.f input,.f select{display:block;width:100%;height:50px;padding:0 16px;border:1.5px solid #8E9FB8;border-radius:10px;background:#F8FAFC;font-size:17px;color:var(--ink)}
+.f input::placeholder{color:#6F8099}
+.f select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background:#F8FAFC url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%23475872' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center/18px}
+.f input:focus,.f select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,105,236,.18);background-color:#fff}
+.f input[aria-invalid="true"]{border-color:#B42318}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .btn{width:100%;margin-top:24px}
+.form .agree{margin-top:14px;font-size:13px;line-height:1.5;color:var(--slate)}
+.form .msg{margin-top:14px;font-size:15px;line-height:1.5}
+.form .msg.bad{color:#B42318}
+.form .msg.good{color:#146C43;font-weight:600}
+/* a field only robots fill in */
+.form .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---------- the bottom ---------- */
+footer{background:var(--navy);color:#C7D3E6;padding:0 0 36px}
+footer .wrap{border-top:1px solid #1E3866;padding-top:48px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+footer img{height:46px;width:auto}
+footer h4{font:600 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+footer ul{list-style:none}
+footer li{margin:8px 0;font-size:16px}
+footer li a{display:inline-block;padding:4px 0}
+footer a:hover{color:#fff;text-decoration:underline}
+footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;font-size:14px;color:#8FA3C4}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit{transition:none}}
+
+/* ---------- a narrower window ---------- */
+@media (max-width:1100px){
+  :root{--gutter:40px}
+  .doors{gap:72px}
+  .door h1,.door h2{font-size:40px}
+  .slide{grid-template-columns:270px 1fr;gap:40px}
+  .drivers .wrap{grid-template-columns:1fr 440px;gap:48px}
+}
+/* ---------- a tablet ---------- */
+@media (max-width:900px){
+  :root{--gutter:28px}
+  .nav{height:72px;gap:16px}
+  .nav .brand img{height:42px}
+  .nav nav{display:none}
+  .nav .btn{margin-left:auto}
+  /* the two doors one above the other: contractors on white, then drivers on the blue */
+  .split{display:none}
+  .doors{grid-template-columns:1fr;gap:0;padding:0 var(--gutter)}
+  .door{padding:56px 0 60px}
+  .right{position:relative;padding:64px var(--gutter) 64px;margin:0 calc(-1 * var(--gutter));background:linear-gradient(135deg,#0058D8,#0046C2)}
+  .right::before{content:"";position:absolute;left:0;right:0;top:-1px;height:18px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0h400v6C330 16 270 2 200 8S70 18 0 6Z' fill='%23fff'/%3E%3C/svg%3E") no-repeat top/100% 100%}
+  .pitch,.show{padding:72px 0}
+  .pitch h2,.show h2{font-size:40px}
+  .pitch p.say{font-size:19px}
+  .pitch .ways{grid-template-columns:1fr;gap:22px}
+  .pitch .way,.pitch .way + .way{padding:0;border:0}
+  .deck{margin:28px calc(-1 * var(--gutter)) 0}
+  .slide{grid-template-columns:1fr;gap:24px;padding:4px var(--gutter) 36px}
+  .topics{flex-direction:row;overflow-x:auto;gap:8px;scrollbar-width:none}
+  .topics::-webkit-scrollbar{display:none}
+  .topic{flex:0 0 78%;border-left:0;border-top:4px solid var(--line);padding:14px 16px 16px}
+  .topic.on{border-top-color:var(--blue)}
+  .reach{padding:72px 0}
+  .reach .wrap{grid-template-columns:1fr;gap:32px}
+  .reach h2{font-size:40px}
+  .reach .ways{min-width:0}
+  .drivers{padding:72px 0}
+  .drivers .wrap{grid-template-columns:1fr;gap:40px}
+  .drivers h2{font-size:40px}
+  footer .cols{grid-template-columns:1fr 1fr;gap:32px}
+}
+/* ---------- a phone ---------- */
+@media (max-width:560px){
+  :root{--gutter:18px}
+  body{font-size:17px}
+  .nav .btn{min-height:42px;padding:0 14px;font-size:14px}
+  .nav .brand img{height:38px}
+  .door h1,.door h2{font-size:34px}
+  .door li{font-size:17px}
+  .btn{min-height:52px;padding:0 22px;font-size:16px}
+  .pitch h2,.show h2,.reach h2,.drivers h2{font-size:32px}
+  .show p.say,.reach p.t{font-size:18px}
+  .deck-tab{padding:12px 12px;font-size:15px}
+  .deck-pause span{display:none}
+  .topic{flex-basis:86%}
+  .form{padding:24px 20px}
+  .two{grid-template-columns:1fr;gap:0}
+  .reach .ways .btn{white-space:normal;text-align:left;padding:10px 18px}
+  footer .cols{grid-template-columns:1fr}
+}
