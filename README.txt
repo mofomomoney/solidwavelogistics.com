@@ -21,7 +21,7 @@ THE PAGE, TOP TO BOTTOM (rebuilt 2026-10-20 from the owner's brief; businesses f
   - Let's cover your routes (#contact): the request form (contact name, company, email, phone if they like,
     where, what the routes need, in their own words) and the email link. The Call link shows only once there's
     a phone number.
-  - Drive with SolidWave (#drive): the driver application (license, years, equipment in their own words).
+  - Drive with SolidWave (#drive): the driver application, Class A only (years with a Class A, equipment in their own words).
   - The bottom: the links, the email, the year.
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
   opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
@@ -31,8 +31,8 @@ WHAT SOLIDWAVE IS (so the words stay right; the owner's brief, 2026-10-20)
   An outsourced fleet and driver operations partner for contracted route coverage: a business needs delivery
   routes covered, and SolidWave supplies and manages the vehicles and drivers to cover them. Not defined by any
   kind of truck or a fleet on hand (whatever equipment the routes need), and not a trucking company, rental
-  business, broker or staffing agency. Drivers: what a role needs depends on the route and its equipment (not
-  Class A only). Don't invent testimonials, years in business, fleet sizes, statistics, coverage areas or
+  business, broker or staffing agency. Drivers: Class A CDL only (the owner, 2026-10-20,
+  over the brief's line that not every role needs one). Don't invent testimonials, years in business, fleet sizes, statistics, coverage areas or
   guarantees; Tracker is shown as how we run, without our payroll, costs or profit, and without promising
   customers tracking or GPS.
 

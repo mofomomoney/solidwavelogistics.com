@@ -124,13 +124,12 @@
         name: function (v) { return v.length >= 2 ? "" : "Enter your full name."; },
         phone: function (v) { return digits(v) >= 10 ? "" : v ? "Enter all 10 digits of your phone number." : "Enter your phone number."; },
         where: function (v) { return v.length >= 2 ? "" : "Enter your city or ZIP code."; },
-        license: function (v) { return v ? "" : "Choose the license you have."; },
-        years: function (v) { return v ? "" : "Choose how long you've driven for work."; },
+        years: function (v) { return v ? "" : "Choose how long you've had your Class A."; },
         equipment: function () { return ""; }
       },
       subject: function (v) { return "Driver application: " + v.name; },
-      body: function (v) { return ["Name: " + v.name, "Phone: " + v.phone, "City or ZIP: " + v.where, "License: " + v.license,
-        "Years driving for work: " + v.years, "Equipment driven: " + (v.equipment || "(not given)")].join("\n"); }
+      body: function (v) { return ["Name: " + v.name, "Phone: " + v.phone, "City or ZIP: " + v.where, 
+        "Years with a Class A: " + v.years, "Equipment driven: " + (v.equipment || "(not given)")].join("\n"); }
     }
   };
   var mark = function (el, err) {

@@ -49,7 +49,7 @@ async function check(W, H, name) {
       r.mailed=decodeURIComponent(window.__mailed).slice(0,90); r.says=f.querySelector(".msg").textContent.slice(0,110); r.left=f.querySelectorAll('[aria-invalid="true"],.err').length;
       return r; };
     out.inquire=run("inquire", {name:"Jordan Avery", org:"Example Freight Co", email:"jordan@example.com", phone:"", region:"Kansas City area", details:"Two routes, Monday to Saturday, starting next month. Box trucks with liftgates."}, ["email","jordan@example"]);
-    out.apply=run("apply", {name:"Sam Rivera", phone:"(555) 555-0142", where:"64105", license:"CDL Class B", years:"3 to 5", equipment:"Box truck"}, ["phone","555-0142"]);
+    out.apply=run("apply", {name:"Sam Rivera", phone:"(555) 555-0142", where:"64105", years:"3 to 5", equipment:"Tractor-trailer"}, ["phone","555-0142"]);
     return out;`);
   const formSays = forms;
   await js(`[].slice.call(document.querySelectorAll("form")).forEach(f=>f.reset()); [].slice.call(document.querySelectorAll(".msg")).forEach(m=>{ m.textContent=""; m.className="msg"; });
