@@ -124,6 +124,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .fan .s-left{transform:translateX(-50%) rotate(calc(var(--fan-a) * -1));z-index:1}
 .fan .s-right{transform:translateX(-50%) rotate(var(--fan-a));z-index:2}
 .fan .s-front{transform:translateX(-50%);z-index:3}
+.fan.dealing img{transition:none}
 .fan:hover .s-left{transform:translateX(-50%) rotate(calc((var(--fan-a) + 4deg) * -1))}
 .fan:hover .s-right{transform:translateX(-50%) rotate(calc(var(--fan-a) + 4deg))}
 .fan:hover .s-front{transform:translateX(-50%) translateY(-10px)}

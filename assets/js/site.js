@@ -152,31 +152,36 @@
   var fan = document.querySelector(".fan");
   if (fan && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
     var cards = [].slice.call(fan.querySelectorAll("img")), slots = ["s-left", "s-right", "s-front"], fanHover = false, fanSeen = false;
-    /* one shuffle, like a hand of cards: the card at the back right is pulled up out of the hand and only passes
-       in front once it is clear of the others, then is set down in front; the front card tucks back into the hand
-       on the left, and the left one slides round behind to the right (the owner, 2026-10-20: "when a card goes to
-       the front it like teleports there… like it gets pulled while in someones hand") */
+    /* one shuffle, like a hand of cards (the owner, 2026-10-20: "when a card goes to the front it like teleports
+       there… like it gets pulled while in someones hand", then "why is card 2 and 3 teleporting still?"). The front
+       card trades places with ONE back card, taking turns between the left and the right, so no card ever crosses
+       behind the others: the back card rises out of the hand while the other two dip to make room, passes in front
+       only once it is clear of them, and is set down in front; the old front card settles into the gap it left.
+       Its own place changes depth only at the end, under the new front card, where nobody sees it */
     var slotOf = function (c) { return slots.filter(function (s) { return c.classList.contains(s); })[0]; };
     var T = function (deg, tx, ty, sc) { return "translateX(-50%) translate(" + (tx || 0) + "%," + (ty || 0) + "%) rotate(" + deg + "deg) scale(" + (sc || 1) + ")"; };
-    var busy = false;
+    var busy = false, side = "s-right";
     var deal = function () {
       if (busy || !cards[0].animate) return;
-      busy = true;
+      busy = true; fan.classList.add("dealing");
       var cs = getComputedStyle(fan), a = parseFloat(cs.getPropertyValue("--fan-a")) || 11, at = {};
       var pull = parseFloat(cs.getPropertyValue("--pull")) || 80, tuck = parseFloat(cs.getPropertyValue("--tuck")) || 22;
       cards.forEach(function (c) { at[slotOf(c)] = c; });
-      var P = at["s-right"], F = at["s-front"], L = at["s-left"];
+      var s = side === "s-right" ? 1 : -1, other = side === "s-right" ? "s-left" : "s-right";
+      var P = at[side], F = at["s-front"], O = at[other], zP = side === "s-right" ? 2 : 1;
       var o = { duration: 1100, easing: "cubic-bezier(.45,.05,.2,1)", fill: "forwards" };
       var anims = [
-        P.animate([{ transform: T(a), zIndex: 2 }, { offset: .45, transform: T(a * .3, 6, -pull, 1.03), zIndex: 2 }, { offset: .46, zIndex: 5 }, { transform: T(0), zIndex: 5 }], o),
-        F.animate([{ transform: T(0), zIndex: 3 }, { offset: .45, transform: T(-a * .55, -6, tuck), zIndex: 3 }, { offset: .46, zIndex: 1 }, { transform: T(-a), zIndex: 1 }], o),
-        L.animate([{ transform: T(-a), zIndex: 0 }, { transform: T(a), zIndex: 0 }], o)
+        P.animate([{ transform: T(s * a), zIndex: zP }, { offset: .45, transform: T(s * a * .3, s * 6, -pull, 1.03), zIndex: zP }, { offset: .46, zIndex: 5 }, { transform: T(0), zIndex: 5 }], o),
+        F.animate([{ transform: T(0), zIndex: 3 }, { offset: .45, transform: T(s * a * .55, s * 8, tuck), zIndex: 3 }, { offset: .92, zIndex: 3 }, { offset: .93, zIndex: zP }, { transform: T(s * a), zIndex: zP }], o),
+        O.animate([{ transform: T(-s * a) }, { offset: .45, transform: T(-s * a * 1.15, -s * 4, tuck * .9) }, { transform: T(-s * a) }], o)
       ];
       anims[0].onfinish = function () {
-        [P, F, L].forEach(function (c) { c.style.transition = "none"; });
-        P.className = "s-front"; F.className = "s-left"; L.className = "s-right";
+        /* the new places, with no slide: the fan is "dealing" (no transitions) until they have taken effect */
+        P.className = "s-front"; F.className = side;
         anims.forEach(function (x) { x.cancel(); });
-        requestAnimationFrame(function () { [P, F, L].forEach(function (c) { c.style.transition = ""; }); busy = false; });
+        void fan.offsetWidth;
+        fan.classList.remove("dealing");
+        side = other; busy = false;
       };
     };
     window.__fan = { deal: deal };   /* for checking the page */
