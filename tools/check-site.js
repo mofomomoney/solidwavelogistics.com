@@ -1,7 +1,7 @@
 /* Checks the site in a HIDDEN window (nothing shows on screen), one page at one size per run, and takes a
    picture of the whole page (in one piece) into tools/shots/<page>-<size>.png. Run with Electron from this folder:
      SIZE=p390 PAGE=index.html ..\ProjectTrackerDesktop\node_modules\electron\dist\electron.exe tools\check-site.js
-   Sizes: computer (1440), tablet (820), and phones 430, 390, 375 and 320 wide. Pages: index.html, drive.html.
+   Sizes: computer (1440), tablet (820), and phones 430, 390, 375 and 320 wide. Pages: index.html, tracker.html, drive.html.
    It looks for: errors on the page, anything wider than the screen or cut off, the fonts and pictures loading,
    the headline's two lines, buttons and boxes too small for a finger, the slideshow moving on by itself, and both
    forms (sent empty, with one wrong box, then right: the email is written and the page says what's next; no
@@ -33,8 +33,8 @@ async function check(name, W, H, page) {
   const info = await js(`await Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,8000))]); await new Promise(r=>setTimeout(r,400));
     document.documentElement.style.scrollBehavior="auto";
     const vw=document.documentElement.clientWidth, say=e=>(e.id ? "#"+e.id : "")+(e.className && typeof e.className==="string" ? "."+e.className.trim().split(/\\s+/).join(".") : "")||e.tagName.toLowerCase();
-    const skip=e=>e.closest(".trap,[hidden],.zoom") || (e.closest(".slide") && e.closest(".slide").getAttribute("aria-hidden")==="true") || getComputedStyle(e).display==="none";
-    const scrollers=["deck","deck-tabs","track","pic","win"];
+    const skip=e=>e.closest(".trap,[hidden],.zoom,.split") || (e.closest(".slide") && e.closest(".slide").getAttribute("aria-hidden")==="true") || getComputedStyle(e).display==="none";
+    const scrollers=["deck","deck-tabs","track","pic","win","top"];   /* the top trims the wave on purpose */
     const out=[], cut=[];
     [].slice.call(document.querySelectorAll("body *")).forEach(e=>{
       if(skip(e)) return; const r=e.getBoundingClientRect(); if(!r.width || !r.height) return;

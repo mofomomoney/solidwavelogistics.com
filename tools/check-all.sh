@@ -2,7 +2,7 @@
 # Runs tools/check-site.js for each page at each size (one hidden window each) and prints one line per run.
 cd "$(dirname "$0")/.." || exit 1
 E=../ProjectTrackerDesktop/node_modules/electron/dist/electron.exe
-for page in ${PAGES:-index.html drive.html}; do
+for page in ${PAGES:-index.html tracker.html drive.html}; do
   for size in ${SIZES:-p320 p375 p390 p430 tablet computer}; do
     SIZE=$size PAGE=$page "$E" tools/check-site.js 2>&1 | grep -E '^\{|FAILED' | node -e '
       let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{ if(!s.startsWith("{")){console.log(s.trim());return;}

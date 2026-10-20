@@ -4,29 +4,30 @@ The company website for solidwavelogistics.com (bought by the owner at Porkbun o
 October). One page, no build step: index.html, assets/css/site.css and assets/js/site.js. It's kept here, outside
 OneDrive, like the app (ProjectTrackerDesktop), with its history in git.
 
-THE PAGE, TOP TO BOTTOM (cut down 2026-10-20: the owner wants it short, said once, no filler sections)
-  - The top: "Your routes. Our responsibility." and the one sentence that says what we do: SolidWave supplies and
-    manages the fleet and Class A CDL drivers that cover your contracted delivery routes. Partner with SolidWave,
-    and a quiet "Looking to drive? Apply here". On the logo's wave: How we work, three numbered steps. On a phone
-    the steps sit under the words, on the blue.
-  - Our operation (#operation): "Our operation. Powered by software we built." and the owner's line "Meet
-    SolidWave Tracker—our in-house-developed platform for managing routes, drivers, and fleet operations in one
-    place." Then the slideshow: Routes, Drivers, Fleet, two points each, sliding on by themselves (Pause/Play;
-    still for people who turn motion off). On a phone: one point at a time under its picture, with dots, swipe
-    left/right, and the picture moves in on the lit part (each point says where: tools/showcase.js). Written by
-    tools/showcase.js; Documents and the Forecast stay in the folder, off the page (its SHOW list). No money.
-  - Let's cover your routes (#contact): the request form (contact name, company, email, phone if they like,
-    where, what the routes need in their own words) and the email link. The Call link shows once there's a phone.
-  - Drive with SolidWave (#drive): one line (local delivery routes for Class A CDL drivers, paid by the day) and
-    Apply now. The application has its own page, drive.html (name, phone, city or ZIP, years with a Class A,
-    equipment in their own words); the top bar, the hero's driver link and the footer go there too.
-  - The bottom: logo, three links, the email, the year.
+THE PAGES (2026-10-20: the owner's brief: say what we do, with substance, before the software; each part says
+something new; then "put the tracker on a separate page on its own")
+  index.html, top to bottom:
+  - The top: "Your routes. Our responsibility." and one sentence (we supply and manage the fleet and Class A CDL
+    drivers that cover your contracted routes), Partner with SolidWave, a quiet driver link. On the logo's wave:
+    How we work, three steps (the partnership, in order).
+  - What we do (#what-we-do): "Last-mile delivery. Fully managed." The subcontractor intro, the three services
+    (contracted route coverage; fleet and driver solutions; daily operations management), and on navy "Why
+    subcontract your routes to SolidWave?" with its paragraph and six points. No savings claims or guarantees.
+  - Our operation (#operation): "Our operation. Our technology." with the Built in-house label, what Tracker is,
+    and See SolidWave Tracker (its own page).
+  - Let's cover your routes (#contact): the request form and the email link.
+  - Drive with SolidWave (#drive): one line and Apply now (the application is drive.html).
+  - The bottom: logo, links, the email, the year.
+  tracker.html: the SolidWave Tracker page, written by tools/showcase.js: the same heading and line, then the
+    slideshow (Routes, Drivers, Fleet, two points each; on a phone one at a time, dots, swipe, the picture moves
+    in on the lit part), and Partner with SolidWave. Documents and the Forecast stay in the folder, off the page.
+  drive.html: the Class A driver application (name, phone, city or ZIP, years with a Class A, equipment).
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
   opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
   it. (Applications going straight into SolidWave Tracker is waiting on the owner.)
 
-WHAT SOLIDWAVE IS (so the words stay right; the owner's brief, 2026-10-20)
-  An outsourced fleet and driver operations partner for contracted route coverage: a business needs delivery
+WHAT SOLIDWAVE IS (so the words stay right; the owner's briefs, 2026-10-20)
+  A last-mile delivery subcontractor: an outsourced fleet and driver operations partner for contracted routes: a business needs delivery
   routes covered, and SolidWave supplies and manages the vehicles and drivers to cover them. Not defined by any
   kind of truck or a fleet on hand (whatever equipment the routes need), and not a trucking company, rental
   business, broker or staffing agency. Drivers: Class A CDL only (the owner, 2026-10-20,

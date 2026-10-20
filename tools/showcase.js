@@ -1,4 +1,4 @@
-/* Writes the "Our operation" slideshow into index.html, between <!-- showcase:start … --> and <!-- showcase:end -->.
+/* Writes the "Our operation" slideshow into tracker.html (its own page since 2026-10-20), between <!-- showcase:start … --> and <!-- showcase:end -->.
    The pictures and where each highlight goes come from tools/slides.json (made by tools/app-shots.js from the
    SolidWave Tracker test copy); the words are below. Run: node tools/showcase.js
 
@@ -59,9 +59,9 @@ const slideHtml = (part, i) => {
 const section = `<!-- showcase:start (written by tools/showcase.js from the app's pictures; change it there) -->
 <section class="show" id="operation" aria-labelledby="howH">
   <div class="wrap">
-    <p class="eyebrow">Our operation</p>
-    <h2 class="display" id="howH">Our operation.<br><span class="w">Powered by software we built.</span></h2>
-    <p class="say">Meet SolidWave Tracker—our in-house-developed platform for managing routes, drivers, and fleet operations in one place.</p>
+    <p class="eyebrow">Our operation <span class="inhouse">Built in-house</span></p>
+    <h1 class="display" id="howH">Our operation.<br><span class="w">Our technology.</span></h1>
+    <p class="say">We built SolidWave Tracker in-house to bring our route coverage, driver coordination, and fleet management into one centralized system. It's the technology behind how we organize, oversee, and manage our daily operation.</p>
     <div class="deck-bar">
       <div class="deck-tabs" role="tablist" aria-label="Parts of SolidWave Tracker">${PARTS.map((p, i) => `<button type="button" class="deck-tab" role="tab" id="tab-${i}" aria-controls="slide-${i}" aria-selected="${i === 0}">${p.c.tab}</button>`).join("")}</div>
       <button type="button" class="deck-pause" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z" fill="currentColor"/></svg><svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg><span>Pause</span></button>
@@ -72,14 +72,15 @@ ${PARTS.map(slideHtml).join("\n")}
       </div>
     </div>
     <p class="fine">Real pages from our system. The names and numbers are examples.</p>
+    <div class="cta"><a class="btn btn-blue" href="index.html#contact">Partner with SolidWave <i data-icon="arrow"></i></a></div>
   </div>
 </section>
 <!-- showcase:end -->`;
 
-const file = path.join(root, "index.html");
+const file = path.join(root, "tracker.html");
 let page = fs.readFileSync(file, "utf8");
 const a = page.indexOf("<!-- showcase:start"), b = page.indexOf("<!-- showcase:end -->");
-if (a < 0 || b < 0) throw new Error("index.html has no showcase markers");
+if (a < 0 || b < 0) throw new Error("tracker.html has no showcase markers");
 page = page.slice(0, a) + section + page.slice(b + "<!-- showcase:end -->".length);
 fs.writeFileSync(file, page);
-console.log("index.html: the slideshow written (" + PARTS.length + " parts of the app)");
+console.log("tracker.html: the slideshow written (" + PARTS.length + " parts of the app)");
