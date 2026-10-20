@@ -53,7 +53,7 @@ PUTTING IT ONLINE
   OK on 2026-10-19. A save pushed there goes live in a minute or two. The CNAME file tells GitHub the site's
   address; _config.yml keeps tools/ and this file off the website (they stay in the repository).
   The address is set at Porkbun by the owner. Porkbun's two starter records (the ones pointing at
-  pixie.porkbun.com) come out, and these go in:
+  uixie.porkbun.com) come out, and these go in:
     A     @    185.199.108.153     A     @    185.199.109.153
     A     @    185.199.110.153     A     @    185.199.111.153
     CNAME www  mofomomoney.github.io
