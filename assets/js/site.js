@@ -172,8 +172,8 @@
       var o = { duration: 1100, easing: "cubic-bezier(.45,.05,.2,1)", fill: "forwards" };
       var anims = [
         P.animate([{ transform: T(s * a), zIndex: zP }, { offset: .45, transform: T(s * a * .3, s * 6, -pull, 1.03), zIndex: zP }, { offset: .46, zIndex: 5 }, { transform: T(0), zIndex: 5 }], o),
-        F.animate([{ transform: T(0), zIndex: 3 }, { offset: .45, transform: T(s * a * .55, s * 8, tuck), zIndex: 3 }, { offset: .92, zIndex: 3 }, { offset: .93, zIndex: zP }, { transform: T(s * a), zIndex: zP }], o),
-        O.animate([{ transform: T(-s * a) }, { offset: .45, transform: T(-s * a * 1.15, -s * 4, tuck * .9) }, { transform: T(-s * a) }], o)
+        F.animate([{ transform: T(0), zIndex: 3 }, { offset: .45, transform: T(s * a * .55, s * 8, tuck), zIndex: 3 }, { offset: .985, zIndex: 3 }, { offset: .995, zIndex: zP }, { transform: T(s * a), zIndex: zP }], o),
+        O.animate([{ transform: T(-s * a) }, { offset: .45, transform: T(-s * a * 1.1, -s * 1.5, tuck * .9) }, { transform: T(-s * a) }], o)
       ];
       anims[0].onfinish = function () {
         /* the new places, with no slide: the fan is "dealing" (no transitions) until they have taken effect */

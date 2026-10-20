@@ -108,7 +108,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- our operation on the homepage: what Tracker is, and the way to its page ---------- */
 .tease{background:var(--paper);padding:80px 0}
-.tease .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+/* the words take what they need; the fan gets the rest (never less than 380px), so it sits nearer the middle of the section and its cards are bigger */
+.tease .wrap{display:grid;grid-template-columns:minmax(0,520px) minmax(min(380px,45%),1fr);gap:48px;align-items:center}
 .tease .eyebrow{color:var(--blue-deep);margin-bottom:16px}
 .tease h2{font-size:48px;color:var(--navy)}
 .tease h2 .w{color:var(--blue)}
@@ -116,17 +117,18 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tease .btn{margin-top:32px}
 /* three pages of the app, fanned out like a hand of cards; they spread a little when pointed at */
 /* --pull: how far a card rises out of the hand (a share of its height) before it passes in front; --tuck: how far the
-   front card dips into the hand meanwhile. Together they clear each other, so nothing pops through */
-.fan{--fan-a:11deg;--pull:80;--tuck:22;position:relative;display:block;height:436px}
-.fan img{position:absolute;left:50%;bottom:10px;width:70%;height:auto;border-radius:12px;background:#fff;
+   front card dips into the hand meanwhile. Together they clear each other, so nothing pops through. The box is as tall as
+   both need: the cards rest in its middle, level with the words, and neither the rise nor the dip leaves the band */
+.fan{--fan-a:11deg;--pull:53;--tuck:53;position:relative;display:block;width:100%;aspect-ratio:25 / 26}
+.fan img{position:absolute;left:50%;bottom:23.4%;width:80%;height:auto;border-radius:12px;background:#fff;
   box-shadow:0 26px 50px -22px rgba(0,19,52,.55),0 0 0 1px rgba(0,19,52,.12);transform-origin:50% 135%;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 /* the three places in the hand; every 2 seconds the cards move round them (site.js) */
 .fan .s-left{transform:translateX(-50%) rotate(calc(var(--fan-a) * -1));z-index:1}
 .fan .s-right{transform:translateX(-50%) rotate(var(--fan-a));z-index:2}
 .fan .s-front{transform:translateX(-50%);z-index:3}
 .fan.dealing img{transition:none}
-.fan:hover .s-left{transform:translateX(-50%) rotate(calc((var(--fan-a) + 4deg) * -1))}
-.fan:hover .s-right{transform:translateX(-50%) rotate(calc(var(--fan-a) + 4deg))}
+.fan:hover .s-left{transform:translateX(-50%) rotate(calc((var(--fan-a) + 2deg) * -1))}
+.fan:hover .s-right{transform:translateX(-50%) rotate(calc(var(--fan-a) + 2deg))}
 .fan:hover .s-front{transform:translateX(-50%) translateY(-10px)}
 
 /* ---------- our operation: SolidWave Tracker, shown as a slideshow ---------- */
@@ -336,7 +338,8 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .why h3{font-size:28px}
   .tease{padding:56px 0}
   .tease .wrap{grid-template-columns:1fr;gap:20px}
-  .fan{--pull:55;--tuck:28;height:430px;max-width:560px;width:100%;margin:0 auto}
+  .fan{max-width:560px;margin:0 auto}
+  .fan img{width:70%}
   .jobtop{padding:56px 0 48px}
   .jobtop h1,.perks h2{font-size:40px}
   .perks{padding:56px 0}
@@ -403,8 +406,6 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .gains li{padding:12px 0;font-size:16px}
   .tease{padding:44px 0}
   .tease .btn{width:100%;margin-top:24px}
-  .fan{--pull:50;--tuck:30;height:calc(min(62vw,250px) + 40px)}
-  .fan img{width:70%;bottom:12px}
   .fan{--fan-a:9deg}
   .win .tb .ctl{display:none}
   .jobtop h1,.perks h2,.howto h2{font-size:min(7vw,30px)}
