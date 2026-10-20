@@ -2,9 +2,13 @@
 # Runs tools/check-site.js for each page at each size (one hidden window each) and prints one line per run.
 cd "$(dirname "$0")/.." || exit 1
 E=../ProjectTrackerDesktop/node_modules/electron/dist/electron.exe
+# each run writes to a file first: the hidden window never writes into another program (a broken link there once put
+# an error box on the screen)
+T=tools/shots/check-run.txt; mkdir -p tools/shots
 for page in ${PAGES:-index.html tracker.html drive.html}; do
   for size in ${SIZES:-p320 p375 p390 p430 tablet computer}; do
-    SIZE=$size PAGE=$page "$E" tools/check-site.js 2>&1 | grep -E '^\{|FAILED' | node -e '
+    SIZE=$size PAGE=$page "$E" tools/check-site.js > "$T" 2>&1
+    grep -E '^\{|FAILED' "$T" | node -e '
       let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{ if(!s.startsWith("{")){console.log(s.trim());return;}
         const j=JSON.parse(s), f=j.forms||{}, show=a=>a&&a.length?JSON.stringify(a):"none", fs=x=>x?(x.sent?"ok":"PROBLEM "+JSON.stringify(x)):"-";
         console.log([j.page.padEnd(10), j.size.padEnd(14), "sideways:"+j.sideways, "out:"+show(j.out), "cut:"+show(j.cut), "tiny:"+show(j.tiny),

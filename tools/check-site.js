@@ -8,6 +8,8 @@
    email app opens). */
 "use strict";
 const { app, BrowserWindow } = require("electron");
+/* an error never opens a box on the screen: it goes to a log file in the temp folder and the check stops */
+process.on("uncaughtException", e => { try { require("fs").appendFileSync(require("path").join(require("os").tmpdir(), "solidwave-check-errors.log"), new Date().toISOString() + " " + __filename + "\n" + ((e && e.stack) || e) + "\n"); } catch (_) {} process.exit(1); });
 const fs = require("fs");
 const path = require("path");
 const root = path.join(__dirname, "..");
