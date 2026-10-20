@@ -47,6 +47,8 @@ CHANGING THINGS
     follows it.
   - The USDOT and MC numbers: the comment in the footer of index.html shows where they go.
   - The slideshow's words: the COPY list in tools/showcase.js, then run:  node tools/showcase.js
+  - After changing assets/css/site.css or assets/js/site.js, run:  node tools/stamp.js  (puts a code from each file on
+    every page's link to it, so browsers load the new one; app pictures get theirs from showcase.js and make-cards.js)
   - The slideshow's pictures: they're real pages of SolidWave Tracker with made-up people and numbers and no
     real store, company or rental-company names. tools/app-shots.js takes them from the app's test copy
     (ProjectTrackerDesktop\test\harness, served at 127.0.0.1:8761) and writes tools/slides.json (where each
