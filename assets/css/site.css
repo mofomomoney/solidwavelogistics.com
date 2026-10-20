@@ -51,7 +51,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav nav{display:flex;gap:30px;margin-left:auto;font:500 16px var(--sans);color:var(--navy)}
 .nav nav a{padding:10px 0}
 .nav nav a:hover,.nav nav a[aria-current="page"]{color:var(--blue)}
-.nav .btn{min-height:46px;padding:0 20px;font-size:15px}
+/* the menu: on a phone or a tablet the sections fold into it; Home and Partner with SolidWave are in it there */
+.nav nav .nav-home,.nav nav .nav-cta,.menu-btn{display:none}
+.menu-btn{align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font:600 15px var(--sans);color:var(--navy);cursor:pointer}
+.menu-btn svg{width:20px;height:20px}
+.menu-btn .ic-close,.menu-btn[aria-expanded="true"] .ic-open{display:none}
+.menu-btn[aria-expanded="true"] .ic-close{display:block}
+.nav .head-cta{min-height:46px;padding:0 20px;font-size:15px}
 
 /* ---------- the top: what we do, once; how we work on the logo's wave ---------- */
 .top{position:relative;overflow:hidden;background:#fff}
@@ -285,15 +291,21 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .cover ol{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 }
 @media (max-width:1000px){
-  .nav nav{display:none}
-  .nav .btn{margin-left:auto}
+  .nav{position:relative}
+  .nav .head-cta{margin-left:auto}
+  .menu-btn{display:inline-flex}
+  .nav nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:6px var(--gutter) 20px;
+    background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 22px 30px -20px rgba(0,19,52,.4)}
+  .nav nav.open{display:flex}
+  .nav nav a{display:flex;align-items:center;min-height:52px;padding:0;border-bottom:1px solid var(--line);font-size:17px}
+  .nav nav .nav-home{display:flex}
 }
 /* ---------- a tablet, and phones: the slideshow one point at a time, under its picture ---------- */
 @media (max-width:900px){
   :root{--gutter:28px}
   .nav{height:72px;gap:16px}
   .nav .brand img{height:42px}
-  .nav .btn{min-height:44px}
+  .nav .head-cta{min-height:44px}
   .cover ol{grid-template-columns:1fr;gap:20px}
   .show{padding:64px 0 48px}
   .show h1,.show h2{font-size:40px;text-wrap:balance}
@@ -348,7 +360,9 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   :root{--gutter:18px}
   body{font-size:17px}
   .nav{height:68px;gap:12px}
-  .nav .btn{padding:0 14px;font-size:14px}
+  .nav .head-cta{display:none}
+  .menu-btn{margin-left:auto}
+  .nav nav .nav-cta{display:inline-flex;justify-content:center;margin-top:18px;border-bottom:0;min-height:52px;color:#fff;font-size:16px}
   .nav .brand img{height:38px}
   .btn{min-height:52px;padding:0 22px;font-size:16px}
   /* the top: the headline keeps its two lines on every phone */
@@ -425,5 +439,5 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
 /* the narrowest phones: the logo and the top bar's button share the width */
 @media (max-width:374px){
   .nav .brand img{height:32px}
-  .nav .btn{padding:0 11px;font-size:14px}
+  .nav .head-cta{padding:0 11px;font-size:14px}
 }

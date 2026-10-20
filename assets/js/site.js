@@ -27,6 +27,16 @@
   };
   document.querySelectorAll("[data-icon]").forEach(function (el) { el.outerHTML = ICON[el.dataset.icon] || ""; });
 
+  /* ---------- the menu on a phone or a tablet: opens and closes; a link, Escape or a tap elsewhere closes it ---------- */
+  var menuBtn = document.querySelector(".menu-btn"), siteNav = document.getElementById("site-nav");
+  if (menuBtn && siteNav) {
+    var setMenu = function (open) { siteNav.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", open ? "true" : "false"); menuBtn.querySelector("span").textContent = open ? "Close" : "Menu"; };
+    menuBtn.addEventListener("click", function () { setMenu(!siteNav.classList.contains("open")); });
+    siteNav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && siteNav.classList.contains("open")) { setMenu(false); menuBtn.focus(); } });
+    document.addEventListener("click", function (e) { if (siteNav.classList.contains("open") && !e.target.closest(".nav")) setMenu(false); });
+  }
+
   /* ---------- how to reach us, filled in wherever the page asks for it ---------- */
   var tel = CONTACT.phone.replace(/[^\d+]/g, "");
   document.querySelectorAll("[data-contact]").forEach(function (el) {

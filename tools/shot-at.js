@@ -13,7 +13,7 @@ const DECK = (process.env.DECK || "").split(",").filter(Boolean).map(Number);
 const wait = ms => new Promise(r => setTimeout(r, ms));
 app.whenReady().then(async () => {
   const win = new BrowserWindow({ show: false, width: W, height: H, useContentSize: true, webPreferences: { backgroundThrottling: false } });
-  await win.loadFile(path.join(__dirname, "..", "index.html"));
+  await win.loadFile(path.join(__dirname, "..", process.env.PAGE || "index.html"));
   const dbg = win.webContents.debugger; dbg.attach("1.3");
   await dbg.sendCommand("Emulation.setDeviceMetricsOverride", { width: W, height: H, deviceScaleFactor: 1, mobile: false });
   /* a hidden window doesn't run the slide's movement, so a picture of another part needs it to jump there */
@@ -22,6 +22,7 @@ app.whenReady().then(async () => {
   await js(`await Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,8000))]); [].slice.call(document.images).forEach(i=>i.loading="eager"); await new Promise(r=>setTimeout(r,600));`);
   for (const id of (process.env.AT || "contact").split(",")) {
     await js(`const e=document.getElementById(${JSON.stringify(id)})||document.querySelector(${JSON.stringify(id)}), bar=document.querySelector(".bar").offsetHeight; window.scrollTo(0, e.getBoundingClientRect().top + scrollY - bar - 8);
+      ${process.env.CLICK ? "const k=document.querySelector(" + JSON.stringify(process.env.CLICK) + "); if(k) k.click();" : ""}
       if(window.__deck){ ${DECK.length ? "__deck.go(" + DECK[0] + ", " + (DECK[1] || 0) + ");" : ""} __deck.pause(); }`);
     await wait(900);
     await win.webContents.capturePage(undefined, { stayHidden: true }); await wait(250);
