@@ -108,11 +108,22 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- our operation on the homepage: what Tracker is, and the way to its page ---------- */
 .tease{background:var(--paper);padding:80px 0}
-.tease .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px 56px}
+.tease .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
 .tease .eyebrow{color:var(--blue-deep);margin-bottom:16px}
 .tease h2{font-size:48px;color:var(--navy)}
 .tease h2 .w{color:var(--blue)}
 .tease p.say{margin-top:20px;font-size:19px;line-height:1.6;color:var(--slate);max-width:640px}
+.tease .btn{margin-top:32px}
+/* three pages of the app, fanned out like a hand of cards; they spread a little when pointed at */
+.fan{position:relative;display:block;height:380px}
+.fan img{position:absolute;left:50%;bottom:28px;width:76%;height:auto;border-radius:12px;background:#fff;
+  box-shadow:0 26px 50px -22px rgba(0,19,52,.55),0 0 0 1px rgba(0,19,52,.12);transform-origin:50% 135%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.fan .c1{transform:translateX(-50%) rotate(-11deg)}
+.fan .c2{transform:translateX(-50%) rotate(11deg)}
+.fan .c3{transform:translateX(-50%)}
+.fan:hover .c1{transform:translateX(-50%) rotate(-15deg)}
+.fan:hover .c2{transform:translateX(-50%) rotate(15deg)}
+.fan:hover .c3{transform:translateX(-50%) translateY(-10px)}
 
 /* ---------- our operation: SolidWave Tracker, shown as a slideshow ---------- */
 .show{background:var(--paper);padding:96px 0 88px}
@@ -266,7 +277,7 @@ footer .wrap{border-top:1px solid #1E3866;padding-top:36px}
 footer a:hover{color:#fff;text-decoration:underline}
 footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit,.zoom{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit,.zoom,.fan img{transition:none}}
 
 /* ---------- a narrower window ---------- */
 @media (max-width:1100px){
@@ -320,6 +331,8 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .why .wrap{grid-template-columns:1fr;gap:28px}
   .why h3{font-size:28px}
   .tease{padding:56px 0}
+  .tease .wrap{grid-template-columns:1fr;gap:20px}
+  .fan{height:330px;max-width:560px;width:100%;margin:0 auto}
   .jobtop{padding:56px 0 48px}
   .jobtop h1,.perks h2{font-size:40px}
   .perks{padding:56px 0}
@@ -385,8 +398,11 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .gains{grid-template-columns:1fr}
   .gains li{padding:12px 0;font-size:16px}
   .tease{padding:44px 0}
-  .tease .wrap{flex-direction:column;align-items:stretch;gap:22px}
-  .tease .btn{width:100%}
+  .tease .btn{width:100%;margin-top:24px}
+  .fan{height:min(62vw,250px)}
+  .fan img{width:70%;bottom:16px}
+  .fan .c1{transform:translateX(-50%) rotate(-9deg)}
+  .fan .c2{transform:translateX(-50%) rotate(9deg)}
   .win .tb .ctl{display:none}
   .jobtop h1,.perks h2,.howto h2{font-size:min(7vw,30px)}
   .jobtop{padding:40px 0 40px}
