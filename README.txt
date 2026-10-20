@@ -9,14 +9,17 @@ THE PAGE, TOP TO BOTTOM (cut down 2026-10-20: the owner wants it short, said onc
     manages the fleet and Class A CDL drivers that cover your contracted delivery routes. Partner with SolidWave,
     and a quiet "Looking to drive? Apply here". On the logo's wave: How we work, three numbered steps. On a phone
     the steps sit under the words, on the blue.
-  - Our operation (#operation): "Every mile accounted for." A focused look at how we stay accountable in
-    SolidWave Tracker: Routes, Drivers, Fleet, two points each, sliding on by themselves (Pause/Play; still for
-    people who turn motion off). Written by tools/showcase.js; Documents and the Forecast stay in the folder, off
-    the page (its SHOW list). No money on the site: no payroll, costs or profit.
+  - Our operation (#operation): "Our operation. Powered by software we built." and the owner's line "Meet
+    SolidWave Tracker—our in-house-developed platform for managing routes, drivers, and fleet operations in one
+    place." Then the slideshow: Routes, Drivers, Fleet, two points each, sliding on by themselves (Pause/Play;
+    still for people who turn motion off). On a phone: one point at a time under its picture, with dots, swipe
+    left/right, and the picture moves in on the lit part (each point says where: tools/showcase.js). Written by
+    tools/showcase.js; Documents and the Forecast stay in the folder, off the page (its SHOW list). No money.
   - Let's cover your routes (#contact): the request form (contact name, company, email, phone if they like,
     where, what the routes need in their own words) and the email link. The Call link shows once there's a phone.
-  - Drive with SolidWave (#drive): one line (local delivery routes for Class A CDL drivers, paid by the day), then
-    the application (name, phone, city or ZIP, years with a Class A, equipment in their own words).
+  - Drive with SolidWave (#drive): one line (local delivery routes for Class A CDL drivers, paid by the day) and
+    Apply now. The application has its own page, drive.html (name, phone, city or ZIP, years with a Class A,
+    equipment in their own words); the top bar, the hero's driver link and the footer go there too.
   - The bottom: logo, three links, the email, the year.
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
   opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
@@ -43,7 +46,7 @@ CHANGING THINGS
     Electron below while the test copy is being served.
   - The small icons and the picture shown when the link is shared (assets/img/og.png): tools/make-assets.js.
 
-CHECKING
+CHECKING (phones: 320, 375, 390 and 430 wide; tablet; computer)
   tools/check-site.js opens the site in a hidden window at a computer's, a tablet's and a phone's width and
   looks for errors, sideways scrolling, fonts, pictures, the slideshow moving, the application's messages and
   buttons too small to tap; it saves full-page pictures to tools/shots (not kept in git). tools/shot-at.js

@@ -37,29 +37,50 @@
     var track = deck.querySelector(".track"), slides = [].slice.call(deck.querySelectorAll(".slide"));
     var tabs = [].slice.call(document.querySelectorAll(".deck-tab")), pause = document.querySelector(".deck-pause");
     var STEP = 4500, still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var s = 0, t = 0, spent = 0, last = 0, paused = !!still, held = false, away = true;
+    var s = 0, t = 0, spent = 0, last = 0, paused = !!still, away = true;
+    /* it waits while a mouse is over it, while the keyboard is in it, and for a few seconds after a finger */
+    var hover = false, kbd = false, touchUntil = 0;
+    var held = function () { return hover || kbd || Date.now() < touchUntil; };
+    var phone = window.matchMedia ? matchMedia("(max-width: 900px)") : { matches: false };
     var topicsOf = function (i) { return [].slice.call(slides[i].querySelectorAll(".topic")); };
+    var dotsOf = function (i) { return [].slice.call(slides[i].querySelectorAll(".tdot")); };
+    /* on a phone the picture moves in on the lit part, so it can be read; on a computer it shows whole */
+    var focus = function (i, k) {
+      var z = slides[i].querySelector(".zoom"), l = slides[i].querySelector(".lit"); if (!z) return;
+      if (!phone.matches) { z.style.transform = ""; l.style.outlineWidth = ""; l.style.borderRadius = ""; return; }
+      /* where to look: the point says (data-f: the middle across, the middle down, how close), or the highlight itself */
+      var b = topicsOf(i)[k], f = b.dataset.f ? b.dataset.f.split(",").map(Number) : null, r = JSON.parse(b.dataset.r);
+      var x = r[0] / 100, y = r[1] / 100, w = r[2] / 100, h = r[3] / 100;
+      var m = f ? f[2] : Math.max(1, Math.min(2.4, 0.92 / w, 0.86 / h)), cx = f ? f[0] : x + w / 2, cy = f ? f[1] : y + h / 2;
+      var tx = Math.min(0, Math.max(1 - m, 0.5 - cx * m)), ty = Math.min(0, Math.max(1 - m, 0.5 - cy * m));
+      z.style.transform = "translate(" + (tx * 100).toFixed(2) + "%," + (ty * 100).toFixed(2) + "%) scale(" + m.toFixed(3) + ")";
+      l.style.outlineWidth = (3 / m).toFixed(2) + "px"; l.style.borderRadius = (8 / m).toFixed(2) + "px";
+    };
     var place = function (i, k) {
       var r = JSON.parse(topicsOf(i)[k].dataset.r), l = slides[i].querySelector(".lit");
       l.style.left = r[0] + "%"; l.style.top = r[1] + "%"; l.style.width = r[2] + "%"; l.style.height = r[3] + "%";
+      focus(i, k);
     };
     var show = function () {
       track.style.transform = "translateX(-" + (s * 100) + "%)";
       slides.forEach(function (el, i) { var on = i === s; el.setAttribute("aria-hidden", on ? "false" : "true"); el.inert = !on; if (!on) place(i, 0); });
       tabs.forEach(function (b, i) { b.setAttribute("aria-selected", i === s ? "true" : "false"); b.tabIndex = i === s ? 0 : -1; });
-      var row = slides[s].querySelector(".topics");
-      topicsOf(s).forEach(function (b, k) {
-        b.classList.toggle("on", k === t); b.setAttribute("aria-pressed", k === t ? "true" : "false"); b.querySelector(".time").style.width = "0";
-        /* on a phone the topics sit in a row: the lit one slides into view (the page itself doesn't move) */
-        if (k === t && row.scrollWidth > row.clientWidth) row.scrollTo({ left: b.offsetLeft - row.offsetLeft - 4, behavior: still ? "auto" : "smooth" });
-      });
+      topicsOf(s).forEach(function (b, k) { b.classList.toggle("on", k === t); b.setAttribute("aria-pressed", k === t ? "true" : "false"); b.querySelector(".time").style.width = "0"; });
+      dotsOf(s).forEach(function (d, k) { d.setAttribute("aria-pressed", k === t ? "true" : "false"); });
       place(s, t);
     };
     var go = function (i, k) { s = i; t = k; spent = 0; show(); };
+    /* the next or the one before; past the last point, the next part of the app */
+    var step = function (d) {
+      var i = s, k = t + d;
+      if (k >= topicsOf(s).length) { i = (s + 1) % slides.length; k = 0; }
+      else if (k < 0) { i = (s - 1 + slides.length) % slides.length; k = topicsOf(i).length - 1; }
+      go(i, k);
+    };
     var frame = function (now) {
       if (!last) last = now;
       var dt = Math.min(now - last, 1000); last = now;   /* a tab coming back from the background doesn't jump ahead */
-      if (!paused && !held && !away) {
+      if (!paused && !held() && !away) {
         spent += dt;
         if (spent >= STEP) { spent = 0; t++; if (t >= topicsOf(s).length) { t = 0; s = (s + 1) % slides.length; } show(); }
       }
@@ -74,18 +95,33 @@
         e.preventDefault(); var n = (i + d + tabs.length) % tabs.length; go(n, 0); tabs[n].focus();
       });
     });
-    slides.forEach(function (el, i) { topicsOf(i).forEach(function (b, k) { b.addEventListener("click", function () { go(i, k); }); }); });
-    deck.addEventListener("mouseenter", function () { held = true; });
-    deck.addEventListener("mouseleave", function () { held = false; });
-    deck.addEventListener("focusin", function () { held = true; });
-    deck.addEventListener("focusout", function () { held = false; });
+    slides.forEach(function (el, i) {
+      topicsOf(i).forEach(function (b, k) { b.addEventListener("click", function () { go(i, k); }); });
+      dotsOf(i).forEach(function (b, k) { b.addEventListener("click", function () { go(i, k); }); });
+    });
+    if (window.matchMedia && matchMedia("(hover: hover)").matches) {
+      deck.addEventListener("mouseenter", function () { hover = true; });
+      deck.addEventListener("mouseleave", function () { hover = false; });
+    }
+    deck.addEventListener("focusin", function (e) { kbd = !!(e.target.matches && e.target.matches(":focus-visible")); });
+    deck.addEventListener("focusout", function () { kbd = false; });
+    /* a phone: swipe left or right for the next point or the one before */
+    var sx = 0, sy = 0;
+    deck.addEventListener("touchstart", function (e) { var p = e.changedTouches[0]; sx = p.clientX; sy = p.clientY; touchUntil = Date.now() + 8000; }, { passive: true });
+    deck.addEventListener("touchend", function (e) {
+      var p = e.changedTouches[0], dx = p.clientX - sx, dy = p.clientY - sy;
+      touchUntil = Date.now() + 6000;
+      if (Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+    var refit = function () { slides.forEach(function (el, i) { focus(i, i === s ? t : 0); }); };
+    if (phone.addEventListener) phone.addEventListener("change", refit); else if (phone.addListener) phone.addListener(refit);
     if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { away = !es[0].isIntersecting; }, { threshold: .35 }).observe(deck);
     else away = false;
     var setPause = function (p) { paused = p; pause.setAttribute("aria-pressed", p ? "true" : "false"); pause.querySelector("span").textContent = p ? "Play" : "Pause"; pause.setAttribute("aria-label", p ? "Play the slideshow" : "Pause the slideshow"); };
     pause.addEventListener("click", function () { setPause(!paused); });
     setPause(paused); show();
     /* for checking the page: where it is, and why it might be waiting */
-    window.__deck = { go: go, pause: function () { setPause(true); }, play: function () { setPause(false); }, state: function () { return { slide: s, topic: t, paused: paused, held: held, away: away, spent: Math.round(spent) }; } };
+    window.__deck = { go: go, pause: function () { setPause(true); }, play: function () { setPause(false); }, state: function () { return { slide: s, topic: t, paused: paused, held: held(), away: away, spent: Math.round(spent) }; } };
     requestAnimationFrame(frame);
   }
 

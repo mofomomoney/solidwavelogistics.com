@@ -40,14 +40,17 @@ button,input,select,textarea{font:inherit;color:inherit}
 .btn svg{width:18px;height:18px;flex:0 0 auto}
 .btn-blue{background:var(--blue);color:#fff}
 .btn-blue:hover{background:var(--blue-deep)}
+.btn-white{background:#fff;color:var(--navy)}
+.btn-white:hover{background:#E8F1FF}
 
 /* ---------- the top bar: the logo, two links, Partner with SolidWave ---------- */
 .bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:40px;height:84px}
+.nav .brand{display:flex;align-items:center;min-height:44px}
 .nav .brand img{height:50px;width:auto}
 .nav nav{display:flex;gap:30px;margin-left:auto;font:500 16px var(--sans);color:var(--navy)}
 .nav nav a{padding:10px 0}
-.nav nav a:hover{color:var(--blue)}
+.nav nav a:hover,.nav nav a[aria-current="page"]{color:var(--blue)}
 .nav .btn{min-height:46px;padding:0 20px;font-size:15px}
 
 /* ---------- the top: what we do, once; how we work on the logo's wave ---------- */
@@ -115,6 +118,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .win .tb .ctl{margin-left:auto;display:flex;gap:20px;color:#93A9CB;font-size:15px;letter-spacing:.05em}
 .pic{position:relative;line-height:0;aspect-ratio:1260/900;overflow:hidden;background:var(--paper)}
 .pic img{width:100%;height:auto}
+/* the picture and its lit part move together (on a phone it moves in on the lit part) */
+.zoom{position:relative;transform-origin:0 0;transition:transform .6s cubic-bezier(.65,0,.35,1)}
+/* which point is showing, on a phone */
+.tdots{display:none}
 /* the lit part: everything else dimmed around it; it glides from topic to topic */
 .lit{position:absolute;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,19,52,.5);outline:3px solid var(--blue-light);
   transition:left .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1)}
@@ -132,16 +139,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .direct a:hover{text-decoration:underline}
 .direct svg{width:20px;height:20px;flex:0 0 auto}
 
-/* ---------- drivers: one line, then the application ---------- */
-.drivers{background:var(--navy);color:#fff;padding:88px 0}
-.drivers .wrap{display:grid;grid-template-columns:1fr 500px;gap:80px;align-items:center}
-.drivers h2{font-size:52px}
-.drivers h2 .w{color:#3EA0FF}
-.drivers p.t{margin-top:20px;font-size:20px;color:#C9D6EA;max-width:440px}
+/* ---------- drivers: one line and Apply now; the application has its own page (drive.html) ---------- */
+.drivers{background:var(--navy);color:#fff;padding:72px 0}
+.drivers .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px 56px}
+.drivers h1,.drivers h2{font-size:52px}
+.drivers .w{color:#3EA0FF}
+.drivers p.t{margin-top:18px;font-size:20px;color:#C9D6EA;max-width:440px}
+/* the application's page: the words, and the form beside them */
+.drivers.apply{padding:88px 0}
+.drivers.apply .wrap{display:grid;grid-template-columns:1fr 500px;gap:80px;align-items:center}
 
 /* ---------- the forms (the request and the driver application) ---------- */
 .form{background:#fff;color:var(--ink);border-radius:18px;padding:32px}
-.form h3{font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
+.form h2,.form h3{font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
 .form p.s{color:var(--slate);font-size:15px;margin-top:6px}
 .f{display:block;margin-top:16px;min-width:0}
 .form > .two:first-child .f,.form > .f:first-child{margin-top:0}
@@ -181,7 +191,7 @@ footer .wrap{border-top:1px solid #1E3866;padding-top:36px}
 footer a:hover{color:#fff;text-decoration:underline}
 footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track,.lit,.zoom{transition:none}}
 
 /* ---------- a narrower window ---------- */
 @media (max-width:1100px){
@@ -189,7 +199,7 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .hero{grid-template-columns:minmax(0,1fr) 320px;gap:96px}
   .slide{grid-template-columns:270px 1fr;gap:40px}
   .reach .wrap{grid-template-columns:minmax(0,1fr) 470px;gap:48px}
-  .drivers .wrap{grid-template-columns:1fr 440px;gap:48px}
+  .drivers.apply .wrap{grid-template-columns:1fr 440px;gap:48px}
 }
 /* the top's two halves one above the other: the words on white, then how we work, on the blue */
 @media (max-width:1080px){
@@ -205,48 +215,100 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .nav nav{display:none}
   .nav .btn{margin-left:auto}
 }
-/* ---------- a tablet ---------- */
+/* ---------- a tablet, and phones: the slideshow one point at a time, under its picture ---------- */
 @media (max-width:900px){
   :root{--gutter:28px}
   .nav{height:72px;gap:16px}
   .nav .brand img{height:42px}
+  .nav .btn{min-height:44px}
   .cover ol{grid-template-columns:1fr;gap:20px}
-  .show{padding:72px 0}
-  .show h2{font-size:40px}
-  .deck{margin:28px calc(-1 * var(--gutter)) 0}
-  .slide{grid-template-columns:1fr;gap:24px;padding:4px var(--gutter) 36px}
-  .topics{flex-direction:row;overflow-x:auto;gap:8px;scrollbar-width:none}
-  .topics::-webkit-scrollbar{display:none}
-  .topic{flex:0 0 78%;border-left:0;border-top:4px solid var(--line);padding:14px 16px 16px}
-  .topic.on{border-top-color:var(--blue)}
-  .reach{padding:72px 0}
-  .reach .wrap{grid-template-columns:1fr;gap:36px}
+  .show{padding:64px 0 48px}
+  .show h2{font-size:40px;text-wrap:balance}
+  .deck-bar{margin-top:28px}
+  .deck{margin:20px calc(-1 * var(--gutter)) 0}
+  .slide{grid-template-columns:1fr;gap:0;align-items:start;padding:4px var(--gutter) 20px}
+  .slide > div:first-child{display:contents}
+  .slide .kicker{order:1;margin-bottom:6px}
+  .slide h3{order:2;margin-bottom:14px;text-wrap:balance}
+  .slide .win{order:3}
+  .slide .topics{order:4;display:block;margin-top:14px}
+  .slide .tdots{order:5}
+  .topic{display:none;border-left:0;border-top:4px solid var(--blue);background:#fff;padding:14px 18px 16px;box-shadow:0 0 0 1px var(--line)}
+  .topic.on{display:block}
+  .topic.on b{font-size:16px}
+  .tdots{display:flex;justify-content:center;gap:2px;margin-top:4px}
+  .tdot{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer}
+  .tdot i{display:block;width:10px;height:10px;border-radius:5px;background:#AEBBCE;transition:width .3s,background .3s}
+  .tdot[aria-pressed="true"] i{width:28px;background:var(--blue)}
+  .reach{padding:64px 0}
+  .reach .wrap{grid-template-columns:1fr;gap:32px}
   .reach .ask{padding-top:0}
   .reach h2{font-size:40px}
-  .drivers{padding:72px 0}
-  .drivers .wrap{grid-template-columns:1fr;gap:36px}
-  .drivers h2{font-size:40px}
+  .drivers{padding:56px 0}
+  .drivers h1,.drivers h2{font-size:40px}
+  .drivers.apply{padding:48px 0 64px}
+  .drivers.apply .wrap{grid-template-columns:1fr;gap:28px}
   .foot .reachout{margin-left:0;width:100%}
+  .foot a{min-height:44px}
+  .form .agree{font-size:14px}
 }
 /* ---------- a phone ---------- */
 @media (max-width:560px){
   :root{--gutter:18px}
   body{font-size:17px}
-  .nav .btn{min-height:42px;padding:0 14px;font-size:14px}
+  .nav{height:68px;gap:12px}
+  .nav .btn{padding:0 14px;font-size:14px}
   .nav .brand img{height:38px}
-  .lead{padding:48px 0 48px}
-  .lead h1{font-size:30px}
-  .lead .sub{font-size:18px}
-  .acts .btn{width:100%}
   .btn{min-height:52px;padding:0 22px;font-size:16px}
-  .show h2,.reach h2,.drivers h2{font-size:30px}
-  .show p.say,.reach p.t,.drivers p.t{font-size:18px}
-  .deck-tab{padding:12px 12px;font-size:15px}
+  /* the top: the headline keeps its two lines on every phone */
+  .lead{padding:36px 0 40px}
+  .lead .eyebrow{margin-bottom:14px}
+  .lead h1{font-size:min(7vw,30px)}
+  .lead .sub{margin-top:16px;font-size:18px}
+  .acts{flex-direction:column;align-items:stretch;gap:4px;margin-top:26px}
+  .acts .btn{width:100%}
+  .quiet{justify-content:center}
+  .cover{padding:44px var(--gutter) 40px}
+  .cover h2{margin-bottom:18px}
+  .cover ol{gap:18px}
+  .show h2,.reach h2,.drivers h1,.drivers h2{font-size:min(7vw,30px)}
+  .show{padding:48px 0 32px}
+  .show p.say,.reach p.t,.drivers p.t{margin-top:14px;font-size:17px}
+  .deck-bar{margin-top:24px}
+  .deck{margin-top:16px}
+  .deck-tabs{flex:1 1 auto}
+  .deck-tab{flex:1 1 0;padding:13px 6px;font-size:15px;text-align:center}
+  .deck-pause{width:44px;height:44px;padding:0;justify-content:center;margin-bottom:2px}
   .deck-pause span{display:none}
-  .topic{flex-basis:86%}
-  .form{padding:24px 20px}
+  .win{border-radius:10px}
+  .win .tb{height:30px;padding:0 12px;font-size:12px}
+  .win .tb img{height:16px}
+  .win .tb .ctl{gap:12px;font-size:13px}
+  .topic span{font-size:16px}
+  .reach{padding:48px 0}
+  .reach .wrap{gap:28px}
+  .direct{margin-top:20px}
+  .direct a{font-size:17px}
+  .drivers{padding:44px 0}
+  .drivers .wrap{flex-direction:column;align-items:stretch;gap:24px}
+  .drivers .btn{width:100%}
+  .drivers.apply{padding:32px 0 48px}
+  .drivers.apply .wrap{gap:24px}
+  /* the forms: labels, notes and messages big enough to read without zooming */
+  .form{padding:24px 18px}
   .two{grid-template-columns:1fr;gap:0}
   .form > .two:first-child .f + .f{margin-top:16px}
-  .direct a{font-size:17px}
-  .foot{flex-direction:column;align-items:flex-start}
+  .f > label{font-size:15px}
+  .form p.s{font-size:16px}
+  .form .agree{font-size:14px}
+  .form .msg{font-size:16px}
+  .f .err{font-size:15px}
+  .form .msg .copy{min-height:44px}
+  .show .fine,footer .fine{font-size:14px}
+  .foot{flex-direction:column;align-items:flex-start;gap:8px}
+}
+/* the narrowest phones: the logo and the top bar's button share the width */
+@media (max-width:374px){
+  .nav .brand img{height:32px}
+  .nav .btn{padding:0 11px;font-size:14px}
 }
