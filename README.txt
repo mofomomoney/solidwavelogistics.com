@@ -26,7 +26,7 @@ something new; then "put the tracker on a separate page on its own")
   drive.html: the recruiting page for Class A drivers (the owner, 2026-10-20, from a flyer: "try hard to recruit
     drivers", trucks provided, Moffett training, worded as the subcontractor): "Class A drivers wanted. We provide
     the truck.", Driver benefits: six (truck provided; competitive pay; weekly pay; consistent routes; up to 6
-    days a week; local routes), what you need (Moffett or forklift experience preferred), what you need, what
+    days a week; local routes), what you need (Moffett or forklift experience preferred; no experience? we train you on the Moffett), what you need, what
     happens next, and the application (name, phone, city or ZIP, years with a Class A, equipment). Weekly pay and
     up to 6 days a week come from the flyer.
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
