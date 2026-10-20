@@ -12,6 +12,9 @@ const path = require("path");
 const root = path.join(__dirname, "..");
 const S = JSON.parse(fs.readFileSync(path.join(__dirname, "slides.json"), "utf8"));
 const pct = (v, of) => +(v / of * 100).toFixed(2);
+/* a short code from a picture's contents, put on its link: a changed picture gets a new link, so browsers load it
+   fresh instead of showing the copy they kept (the owner, 2026-10-20: "ive hit f5 multiple times") */
+const ver = file => require("crypto").createHash("sha1").update(fs.readFileSync(path.join(root, file))).digest("hex").slice(0, 8);
 
 /* each part of the app, in the order of slides.json. A point is [which highlight on the picture, its title, its
    line, and for phones where to zoom: [the middle across, the middle down (parts of the picture), how close]]. The
@@ -52,7 +55,7 @@ const slideHtml = (part, i) => {
           <div class="topics">${c.topics.map((t, k) => `<button type="button" class="topic${k === 0 ? " on" : ""}" aria-pressed="${k === 0}" data-r="${JSON.stringify(r(sl.topics[t[0]]))}"${t[3] ? ` data-f="${t[3].join(",")}"` : ""}><b>${t[1]}</b><span>${t[2]}</span><i class="time"></i></button>`).join("")}</div>
           <div class="tdots" role="group" aria-label="${c.tab}: points">${c.topics.map((t, k) => `<button type="button" class="tdot" aria-pressed="${k === 0}" aria-label="Point ${k + 1} of ${c.topics.length}: ${t[1]}"><i></i></button>`).join("")}</div></div>
         <figure class="win"><div class="tb"><img src="assets/img/wave-small.png" alt="" width="81" height="22">SolidWave Tracker<span class="ctl" aria-hidden="true">&#8211;&nbsp;&nbsp;&#9633;&nbsp;&nbsp;&#215;</span></div>
-          <div class="pic"><div class="zoom"><img src="assets/img/app/${sl.img}" alt="${c.tab} in SolidWave Tracker" width="${sl.w}" height="${sl.h}"${i ? ' loading="lazy"' : ""}><span class="lit" style="left:${first[0]}%;top:${first[1]}%;width:${first[2]}%;height:${first[3]}%"></span></div></div></figure>
+          <div class="pic"><div class="zoom"><img src="assets/img/app/${sl.img}?v=${ver("assets/img/app/" + sl.img)}" alt="${c.tab} in SolidWave Tracker" width="${sl.w}" height="${sl.h}"${i ? ' loading="lazy"' : ""}><span class="lit" style="left:${first[0]}%;top:${first[1]}%;width:${first[2]}%;height:${first[3]}%"></span></div></div></figure>
       </div>`;
 };
 
