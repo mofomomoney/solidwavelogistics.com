@@ -76,7 +76,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .cover li b{display:block;font:800 17px/1.25 var(--display);font-stretch:125%;text-transform:uppercase;color:#fff;margin-bottom:4px;padding-top:2px}
 
 /* ---------- what we do: the services, and why subcontract your routes to us ---------- */
-.what{background:#fff;padding:96px 0 0}
+.what{background:var(--paper);padding:96px 0 0}
 .what .head{display:block}
 .what .eyebrow{color:var(--blue-deep);margin-bottom:16px}
 .what h2{font-size:48px;color:var(--navy)}
@@ -85,7 +85,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .svc3{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--line)}
 .svc3 li{padding:32px 32px 8px 0}
 .svc3 li + li{padding-left:32px;border-left:1px solid var(--line)}
-.svc3 li > svg{display:block;width:48px;height:48px;padding:12px;border-radius:12px;background:#E8F1FF;color:var(--blue-deep)}
+.svc3 li > svg{display:block;width:48px;height:48px;padding:12px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line);color:var(--blue-deep)}
 .svc3 h3{margin-top:20px;font:800 20px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
 .svc3 p{margin-top:12px;font-size:17px;line-height:1.6;color:var(--slate)}
 .why{margin-top:80px;background:var(--navy);color:#fff;padding:72px 0}
