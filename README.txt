@@ -47,10 +47,15 @@ DRIVER APPLICATIONS
   For now, sending one opens the driver's email app with the application filled in, addressed to the email in
   CONTACT. The plan (waiting on the owner's yes): applications go straight into SolidWave Tracker as Leads.
 
-PUTTING IT ONLINE (not done yet; only with the owner's OK, since it makes the site public)
-  Free hosting on GitHub Pages (the owner's GitHub account, the same one the app's updates come from). The CNAME
-  file tells GitHub the site's address. At Porkbun, the address points at GitHub Pages:
+PUTTING IT ONLINE
+  Hosted free on GitHub Pages: the public repository github.com/mofomomoney/solidwavelogistics.com (the owner's
+  GitHub account, the same one the app's updates come from), published from its master branch with the owner's
+  OK on 2026-10-19. A save pushed there goes live in a minute or two. The CNAME file tells GitHub the site's
+  address; _config.yml keeps tools/ and this file off the website (they stay in the repository).
+  The address is set at Porkbun by the owner. Porkbun's two starter records (the ones pointing at
+  pixie.porkbun.com) come out, and these go in:
     A     @    185.199.108.153     A     @    185.199.109.153
     A     @    185.199.110.153     A     @    185.199.111.153
-    CNAME www  <github user>.github.io
-  Email: Porkbun's free email forwarding can send info@solidwavelogistics.com to the owner's inbox.
+    CNAME www  mofomomoney.github.io
+  Email: Porkbun's free email forwarding sends info@solidwavelogistics.com to the owner's inbox (set up at
+  Porkbun; it adds its own mail records, which stay).

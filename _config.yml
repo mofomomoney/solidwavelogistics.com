@@ -1,0 +1,5 @@
+# GitHub Pages builds the website from this folder. These stay in the folder (and on GitHub) but aren't put on
+# the website itself.
+exclude:
+  - tools
+  - README.txt
