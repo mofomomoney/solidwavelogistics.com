@@ -11,7 +11,8 @@ THE PAGE, TOP TO BOTTOM (the owner's picks from the mockups, 2026-10-19)
   - Our mission: "The last-mile partner contractors count on.", the tractor + flatbed + Moffett drawing (drawn
     in site.js), Safety first / On time / Care on every drop.
   - How we run: "Every mile accounted for." A slideshow of SolidWave Tracker (the owner's own app): Drivers,
-    Routes, Equipment, Documents, Financials, three selling points each. Every 4.5 seconds the next point lights
+    Routes, Equipment, Documents, Financials (its Forecast tab, the owner's favorite part), three selling points
+    each. Every 4.5 seconds the next point lights
     up on the real app picture; after the third, the whole section slides to the next part, and after Financials
     it starts over. It waits while it's pointed at or off screen, has Pause/Play, and doesn't move on its own for
     people who turn motion off. Written by tools/showcase.js (see below).

@@ -30,10 +30,11 @@ const COPY = [
     ["All in one place", "CDLs, medical cards, insurance certificates, agreements. One list, nothing lost in a drawer."],
     ["Tied to its driver or store", "Every document belongs to a driver or a store, one click from their page."],
     ["Found in seconds", "Search by name, or narrow it down by type, driver, store or tag."]] },
-  { tab: "Financials", kicker: "Financials", title: "We know our numbers", topics: [
-    ["Every week, in and out", "What came in and what went out, side by side with what we expected."],
-    ["Every route, every day", "What each route brought in, day by day, store by store."],
-    ["Every cost counted", "Drivers, fuel, insurance and rentals, down to what's left over."]] },
+  /* the Forecast tab (the owner, 2026-10-20: "the forecast is the coolest part about the financials. Show that.") */
+  { tab: "Financials", kicker: "Forecast", title: "The math before the handshake", topics: [
+    ["Every deal, line by line", "Rate, driver pay, rent, fuel and insurance for each configuration, before we say yes."],
+    ["A week, a month, a year", "What a deal leaves each week, month and year, and the cash it takes to start."],
+    ["Cash, week by week", "Costs out, pay in, and the week it's back to even. So every route we take, we keep running."]] },
 ];
 if (COPY.length !== S.slides.length) throw new Error("slides.json has " + S.slides.length + " pictures, the words have " + COPY.length);
 
