@@ -115,15 +115,17 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tease p.say{margin-top:20px;font-size:19px;line-height:1.6;color:var(--slate);max-width:640px}
 .tease .btn{margin-top:32px}
 /* three pages of the app, fanned out like a hand of cards; they spread a little when pointed at */
-.fan{position:relative;display:block;height:380px}
-.fan img{position:absolute;left:50%;bottom:28px;width:76%;height:auto;border-radius:12px;background:#fff;
+/* --pull: how far a card rises out of the hand (a share of its height) before it passes in front; --tuck: how far the
+   front card dips into the hand meanwhile. Together they clear each other, so nothing pops through */
+.fan{--fan-a:11deg;--pull:80;--tuck:22;position:relative;display:block;height:436px}
+.fan img{position:absolute;left:50%;bottom:10px;width:70%;height:auto;border-radius:12px;background:#fff;
   box-shadow:0 26px 50px -22px rgba(0,19,52,.55),0 0 0 1px rgba(0,19,52,.12);transform-origin:50% 135%;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 /* the three places in the hand; every 2 seconds the cards move round them (site.js) */
-.fan .s-left{transform:translateX(-50%) rotate(-11deg);z-index:1}
-.fan .s-right{transform:translateX(-50%) rotate(11deg);z-index:2}
+.fan .s-left{transform:translateX(-50%) rotate(calc(var(--fan-a) * -1));z-index:1}
+.fan .s-right{transform:translateX(-50%) rotate(var(--fan-a));z-index:2}
 .fan .s-front{transform:translateX(-50%);z-index:3}
-.fan:hover .s-left{transform:translateX(-50%) rotate(-15deg)}
-.fan:hover .s-right{transform:translateX(-50%) rotate(15deg)}
+.fan:hover .s-left{transform:translateX(-50%) rotate(calc((var(--fan-a) + 4deg) * -1))}
+.fan:hover .s-right{transform:translateX(-50%) rotate(calc(var(--fan-a) + 4deg))}
 .fan:hover .s-front{transform:translateX(-50%) translateY(-10px)}
 
 /* ---------- our operation: SolidWave Tracker, shown as a slideshow ---------- */
@@ -333,7 +335,7 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .why h3{font-size:28px}
   .tease{padding:56px 0}
   .tease .wrap{grid-template-columns:1fr;gap:20px}
-  .fan{height:330px;max-width:560px;width:100%;margin:0 auto}
+  .fan{--pull:55;--tuck:28;height:430px;max-width:560px;width:100%;margin:0 auto}
   .jobtop{padding:56px 0 48px}
   .jobtop h1,.perks h2{font-size:40px}
   .perks{padding:56px 0}
@@ -400,10 +402,9 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .gains li{padding:12px 0;font-size:16px}
   .tease{padding:44px 0}
   .tease .btn{width:100%;margin-top:24px}
-  .fan{height:min(62vw,250px)}
-  .fan img{width:70%;bottom:16px}
-  .fan .s-left{transform:translateX(-50%) rotate(-9deg)}
-  .fan .s-right{transform:translateX(-50%) rotate(9deg)}
+  .fan{--pull:50;--tuck:30;height:calc(min(62vw,250px) + 40px)}
+  .fan img{width:70%;bottom:12px}
+  .fan{--fan-a:9deg}
   .win .tb .ctl{display:none}
   .jobtop h1,.perks h2,.howto h2{font-size:min(7vw,30px)}
   .jobtop{padding:40px 0 40px}
