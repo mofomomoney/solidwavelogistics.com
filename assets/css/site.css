@@ -184,9 +184,43 @@ button,input,select,textarea{font:inherit;color:inherit}
 .drivers.apply{padding:88px 0}
 .drivers.apply .wrap{display:grid;grid-template-columns:1fr 500px;gap:80px;align-items:center}
 
+/* ---------- the driver page: who we want, what they get, what they need ---------- */
+.jobtop{background:var(--navy);color:#fff;padding:88px 0 80px}
+.jobtop .eyebrow{color:#9FC3FF;margin-bottom:18px}
+.jobtop h1{font-size:52px}
+.jobtop h1 .w{color:#3EA0FF}
+.jobtop p.t{margin-top:24px;font-size:20px;line-height:1.6;color:#C9D6EA;max-width:720px}
+.jobtop .acts{margin-top:32px}
+.takes{font-size:16px;color:#9FB2CF}
+.perks{background:#fff;padding:88px 0}
+.perks .eyebrow{color:var(--blue-deep);margin-bottom:16px}
+.perks h2{font-size:48px;color:var(--navy)}
+.perks h2 .w{color:var(--blue)}
+.perk6{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:48px;border-top:1px solid var(--line)}
+.perk6 li{padding:30px 28px 30px 0;border-bottom:1px solid var(--line)}
+.perk6 li:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line)}
+.perk6 li > svg{display:block;width:48px;height:48px;padding:12px;border-radius:12px;background:#E8F1FF;color:var(--blue-deep)}
+.perk6 h3{margin-top:18px;font:800 19px/1.2 var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
+.perk6 p{margin-top:10px;font-size:17px;line-height:1.55;color:var(--slate)}
+/* what you need and what happens next, beside the application */
+.drivers.apply .wrap{align-items:start}
+.howto h2{font-size:44px}
+.howto h2 .w{color:#3EA0FF}
+.needs{list-style:none;display:grid;gap:12px;margin-top:24px}
+.needs li{display:flex;gap:12px;align-items:flex-start;font-size:18px;line-height:1.45;color:#E3EAF5}
+.needs svg{width:20px;height:20px;flex:0 0 auto;margin-top:3px;color:#3EA0FF}
+.howto h3{margin-top:40px;font:600 13px/1.3 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#9FC3FF}
+.next{list-style:none;display:grid;gap:16px;margin-top:18px}
+.next li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:start}
+.next .n{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.55);font:700 15px var(--sans);color:#fff}
+.next p{font-size:16px;line-height:1.5;color:#C9D6EA}
+.next b{display:block;font-weight:700;color:#fff}
+
 /* ---------- the forms (the request and the driver application) ---------- */
 .form{background:#fff;color:var(--ink);border-radius:18px;padding:32px}
 .form h2,.form h3{font:800 22px var(--display);font-stretch:125%;text-transform:uppercase;color:var(--navy)}
+.drivers .form h2{font-size:22px}   /* the form's title stays small, whatever size the section's headings are */
+.nb{white-space:nowrap}
 .form p.s{color:var(--slate);font-size:15px;margin-top:6px}
 .f{display:block;margin-top:16px;min-width:0}
 .form > .two:first-child .f,.form > .f:first-child{margin-top:0}
@@ -274,6 +308,13 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .why .wrap{grid-template-columns:1fr;gap:28px}
   .why h3{font-size:28px}
   .tease{padding:56px 0}
+  .jobtop{padding:56px 0 48px}
+  .jobtop h1,.perks h2{font-size:40px}
+  .perks{padding:56px 0}
+  .perk6{grid-template-columns:1fr 1fr;margin-top:32px}
+  .perk6 li,.perk6 li:not(:nth-child(3n+1)){padding:24px 20px 24px 0;border-left:0}
+  .perk6 li:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
+  .howto h2{font-size:36px}
   .deck-bar{margin-top:28px}
   .deck{margin:20px calc(-1 * var(--gutter)) 0}
   .slide{grid-template-columns:1fr;gap:0;align-items:start;padding:4px var(--gutter) 20px}
@@ -333,6 +374,19 @@ footer .fine{margin-top:24px;font-size:14px;color:#8FA3C4}
   .tease .wrap{flex-direction:column;align-items:stretch;gap:22px}
   .tease .btn{width:100%}
   .win .tb .ctl{display:none}
+  .jobtop h1,.perks h2,.howto h2{font-size:min(7vw,30px)}
+  .jobtop{padding:40px 0 40px}
+  .jobtop p.t{margin-top:16px;font-size:17px}
+  .takes{text-align:center}
+  .perks{padding:44px 0}
+  .perk6{grid-template-columns:1fr;margin-top:24px}
+  .perk6 li,.perk6 li:not(:nth-child(3n+1)),.perk6 li:nth-child(even){display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:18px 0;border-left:0}
+  .perk6 li > svg{width:44px;height:44px;padding:11px}
+  .perk6 h3{margin-top:2px;font-size:17px}
+  .perk6 p{margin-top:4px;font-size:16px}
+  .needs li{font-size:17px}
+  .drivers .form h2{font-size:20px}
+  .howto h3{margin-top:28px}
   .show{padding:48px 0 32px}
   .show p.say,.reach p.t,.drivers p.t{margin-top:14px;font-size:17px}
   .deck-bar{margin-top:24px}

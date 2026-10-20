@@ -21,7 +21,12 @@ something new; then "put the tracker on a separate page on its own")
   tracker.html: the SolidWave Tracker page, written by tools/showcase.js: the same heading and line, then the
     slideshow (Routes, Drivers, Fleet, two points each; on a phone one at a time, dots, swipe, the picture moves
     in on the lit part), and Partner with SolidWave. Documents and the Forecast stay in the folder, off the page.
-  drive.html: the Class A driver application (name, phone, city or ZIP, years with a Class A, equipment).
+  drive.html: the recruiting page for Class A drivers (the owner, 2026-10-20, from a flyer: "try hard to recruit
+    drivers", trucks provided, Moffett training, worded as the subcontractor): "Class A drivers wanted. We provide
+    the truck.", six benefits (truck provided; Moffett training and certification, no experience needed;
+    competitive day rate, paid weekly; consistent routes; up to 6 days a week; local routes), what you need, what
+    happens next, and the application (name, phone, city or ZIP, years with a Class A, equipment). Weekly pay and
+    up to 6 days a week come from the flyer.
   Both forms check every box and say what's wrong under it. There's no server behind the site, so sending one
   opens the visitor's own email with everything filled in, addressed to info@; if nothing opens, they can copy
   it. (Applications going straight into SolidWave Tracker is waiting on the owner.)
